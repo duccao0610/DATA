@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250px"
+    android:orientation="horizontal"
+    android:weightSum="12"
+    android:paddingLeft="15px"
+    android:paddingRight="15px">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="5">
+
+        <ImageView
+            android:id="@+id/ivAvatarPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile_icon"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:paddingLeft="30px"
+        android:layout_gravity="center"
+        android:paddingRight="10px">
+
+        <TextView
+            android:id="@+id/tvTimePost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="italic"
+            android:fontFamily="sans-serif"
+            android:layout_gravity="left"
+            android:text="01/01/2018"/>
+
+        <TextView
+            android:id="@+id/tvContentPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:textSize="45px"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/cardview_dark_background"
+            android:text="Đi uống Starbucks liên hoan Newyear"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="4"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvPersonalConsume"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/red"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:textSize="80px"
+            android:text="-134000 đ"/>
+
+        <TextView
+            android:id="@+id/tvGroupConsume"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:gravity="right"
+            android:textSize="50px"
+            android:text="-560000 đ"/>
+
+    </LinearLayout>
+</LinearLayout>
