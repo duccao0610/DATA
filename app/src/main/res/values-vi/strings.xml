@@ -8,4 +8,5 @@
     <string name="tbregister">Đăng ký bằng email</string>
     <string name="submit">Xác nhận</string>
     <string name="tbforgot">Nhập địa chỉ email mà bạn đã đăng ký, chúng tôi sẽ gửi cho bạn một email khôi phục.</string>
+    <string name="themgiaodich">Thêm giao dịch</string>
 </resources>
