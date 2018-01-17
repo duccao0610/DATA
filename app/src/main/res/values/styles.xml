@@ -6,6 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">#04c441</item>
+        <item name="android:colorForeground">#33691e</item>
+        <item name="colorControlNormal">#b4b0af</item>
+        <item name="android:textColorSecondary">#673ab7</item>
     </style>
 
     <!-- Fullscreen application theme. -->
@@ -13,6 +20,13 @@
         <!-- Customize your theme here. -->
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">#04c441</item>
+        <item name="android:colorForeground">#33691e</item>
+        <item name="colorControlNormal">#b4b0af</item>
+        <item name="android:textColorSecondary">#673ab7</item>
     </style>
 
 </resources>
