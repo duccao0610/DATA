@@ -11,4 +11,25 @@
     <string name="tbregister">Register with email</string>
     <string name="tbforgot">Enter the email address you used to register, and we will send you an email to recover your password in no time.</string>
     <string name="submit">Submit</string>
+
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Welcome to Money Hater!</string>
+    <string name="slide_1_desc">Amazing android app with cool features!</string>
+
+    <string name="slide_2_title">Amazing Features</string>
+    <string name="slide_2_desc">Amazing features and it's 100% free to use</string>
+
+    <string name="slide_3_title">All in One App</string>
+    <string name="slide_3_desc">More than XXX features in one application!</string>
+
+    <string name="slide_4_title">Great Discounts</string>
+    <string name="slide_4_desc">Best discounts on every single service we offer!</string>
+
+    <!--<string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>-->
+    <!--<string name="play_again">Play Again</string>-->
 </resources>
