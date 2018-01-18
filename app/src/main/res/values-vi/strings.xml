@@ -9,4 +9,16 @@
     <string name="submit">Xác nhận</string>
     <string name="tbforgot">Nhập địa chỉ email mà bạn đã đăng ký, chúng tôi sẽ gửi cho bạn một email khôi phục.</string>
     <string name="themgiaodich">Thêm giao dịch</string>
+    <string name="title_activity_welcome">Màn hình chính</string>
+    <string name="next">Tiếp tục</string>
+    <string name="skip">Bỏ qua</string>
+    <string name="start">Đã hiểu</string>
+    <string name="slide_1_title">Chào mừng đến với Money Hater</string>
+    <string name="slide_1_desc">Ứng dụng Android tuyệt vời với những tính năng nổi bật</string>
+    <string name="slide_2_title">Những tính năng tuyệt vời</string>
+    <string name="slide_2_desc">Những tính năng tuyệt vời và hoàn toàn miễn phí</string>
+    <string name="slide_3_title">Tất cả trong một ứng dụng</string>
+    <string name="slide_3_desc">Hàng chục tính năng</string>
+    <string name="tieude">Tiêu đề</string>
+    <string name="noidung">Chi tiết</string>
 </resources>
