@@ -8,25 +8,41 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ThemGiaoDichActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewThanhVien;
     ArrayList<ThanhVien> listThanhVien;
     RecyclerView.Adapter adapter;
-
+    DatabaseReference relationsRef, usersRef, groupsRef, paymentsRef;
+    EditText tongTien, title;
+    long gid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_giao_dich);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
+        gid = 1; //current group
+        relationsRef = FirebaseDatabase.getInstance().getReference("relations");
+        usersRef = FirebaseDatabase.getInstance().getReference("users");
+        groupsRef = FirebaseDatabase.getInstance().getReference("groups");
+        paymentsRef = FirebaseDatabase.getInstance().getReference("payments");
         // my_child_toolbar is defined in the layout file
         Toolbar myChildToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myChildToolbar);
@@ -37,27 +53,43 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-        listThanhVien = new ArrayList<>();
-        ThanhVien tv1 = new ThanhVien(R.drawable.intro1, "Vu Van Duc");
-        ThanhVien tv2 = new ThanhVien(R.drawable.intro2, "Cao Minh Duc");
-        listThanhVien.add(tv1);
-        listThanhVien.add(tv2);
-        listThanhVien.add(tv1);
-        listThanhVien.add(tv1);
-        listThanhVien.add(tv1);
-        listThanhVien.add(tv1);
-        listThanhVien.add(tv1);
-        listThanhVien.add(tv1);
-        listThanhVien.add(tv1);
-        recyclerViewThanhVien = findViewById(R.id.recyclerViewThanhVien);
-        recyclerViewThanhVien.setHasFixedSize(true);
-        adapter = new CustomAdapter(listThanhVien, getApplicationContext());
+        final long gid1 = gid;
+        relationsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listThanhVien = new ArrayList();
+                for(final DataSnapshot relationSnapshot : dataSnapshot.getChildren()){
+                    if(relationSnapshot.child("gid").getValue(Long.class) == gid1){
+                        usersRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot2) {
+                                User tmp = dataSnapshot2.child(relationSnapshot.child("uid").getValue(String.class)).getValue(User.class);
+                                ThanhVien tv = new ThanhVien(R.drawable.intro1, tmp.getMail());
+                                listThanhVien.add(tv);
+                            }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerViewThanhVien.setLayoutManager(layoutManager);
-        DividerItemDecoration decoration = new DividerItemDecoration(this, layoutManager.getOrientation());
-        recyclerViewThanhVien.addItemDecoration(decoration);
-        recyclerViewThanhVien.setAdapter(adapter);
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                            }
+                        });
+                    }
+                }
+                recyclerViewThanhVien = findViewById(R.id.recyclerViewThanhVien);
+                recyclerViewThanhVien.setHasFixedSize(true);
+                adapter = new CustomAdapter(listThanhVien, getApplicationContext());
+
+                LinearLayoutManager layoutManager = new LinearLayoutManager(ThemGiaoDichActivity.this, LinearLayoutManager.VERTICAL, false);
+                recyclerViewThanhVien.setLayoutManager(layoutManager);
+                DividerItemDecoration decoration = new DividerItemDecoration(ThemGiaoDichActivity.this, layoutManager.getOrientation());
+                recyclerViewThanhVien.addItemDecoration(decoration);
+                recyclerViewThanhVien.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+
     }
 
     @Override
@@ -74,6 +106,7 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
                 // as a favorite...
                 Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ThemGiaoDichActivity.this, MainScreen.class);
+                process();
                 startActivity(intent);
                 return true;
 
@@ -83,5 +116,87 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void process() {
+        tongTien = findViewById(R.id.edtTongtien);
+        title = findViewById(R.id.edtDetails);
+        ArrayList<ThanhVien> Selected = new ArrayList();
+        for (ThanhVien tv : listThanhVien){
+            if(tv.isChecked()) Selected.add(tv);
+        }
+        try {
+            final long Sum = Long.parseLong(tongTien.getText().toString());
+            final String content = title.getText().toString();
+            final String date = Calendar.getInstance().getTime().toString();
+            final long each = Sum/Selected.size();
+
+            groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    long oldSum = dataSnapshot.child(gid+"").child("total").getValue(Long.class);
+                    groupsRef.child(gid+"").child("total").setValue(oldSum+Sum);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+
+            for(final ThanhVien tv : Selected){
+                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(final DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                            if (userSnapshot.child("mail").getValue(String.class).equals(tv.getTen())){
+                                long oldcash = userSnapshot.child("cash").getValue(Long.class);
+                                usersRef.child(userSnapshot.getKey().toString()).child("cash").setValue(oldcash-each);
+                                paymentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        long count = dataSnapshot.getChildrenCount() + 1;
+                                        Payment tmp = new Payment(date, content, userSnapshot.getKey().toString(), each, gid, Sum);
+                                        paymentsRef.child(count+"").setValue(tmp);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+
+                                    }
+                                });
+                                relationsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for(DataSnapshot relationSnapshot : dataSnapshot.getChildren()){
+                                            if(relationSnapshot.child("uid").getValue(String.class).equals(userSnapshot.getKey().toString())){
+                                                long oldspent = relationSnapshot.child("spentwith").getValue(Long.class);
+                                                relationsRef.child(relationSnapshot.getKey().toString()).child("spentwith").setValue(oldspent + each);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+        }
+        catch (Exception ex){
+
+        }
+
     }
 }
