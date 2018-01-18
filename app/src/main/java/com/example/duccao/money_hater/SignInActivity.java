@@ -95,8 +95,8 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser currentUser) {
-        Toast.makeText(SignInActivity.this, "Authentication success",
-                Toast.LENGTH_SHORT).show();
+        intent = new Intent(SignInActivity.this, MainScreen.class);
+        startActivity(intent);
     }
 
 
