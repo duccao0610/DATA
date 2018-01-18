@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
+    DatabaseReference userRef;
     private static final String TAG = "";
     private FirebaseAuth mAuth;
     EditText email, pass;
@@ -29,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        userRef = FirebaseDatabase.getInstance().getReference("users");
         register = findViewById(R.id.btnregister);
         mAuth = FirebaseAuth.getInstance();
 
@@ -72,8 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Toast.makeText(RegisterActivity.this, "Authentication success. Please login!",
-                Toast.LENGTH_SHORT).show();
+        User tmp = new User(0, user.getEmail());
+        userRef.child(user.getUid()).setValue(tmp);
         intent = new Intent( RegisterActivity.this,SignInActivity.class);
         startActivity(intent);
     }
