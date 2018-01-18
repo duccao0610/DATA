@@ -77,7 +77,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         User tmp = new User(0, user.getEmail());
-        userRef.setValue(user.getUid());
         userRef.child(user.getUid()).setValue(tmp);
         intent = new Intent( RegisterActivity.this,SignInActivity.class);
         startActivity(intent);
