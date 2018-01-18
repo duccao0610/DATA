@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="250px"
+    android:layout_height="80dp"
     android:orientation="horizontal"
     android:weightSum="12"
-    android:paddingLeft="15px"
-    android:paddingRight="15px">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,9 +26,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="3"
-        android:paddingLeft="30px"
+        android:paddingLeft="10dp"
         android:layout_gravity="center"
-        android:paddingRight="10px">
+        android:paddingRight="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp">
 
         <TextView
             android:id="@+id/tvTimePost"
@@ -37,7 +39,7 @@
             android:textColor="@color/gray"
             android:textStyle="italic"
             android:fontFamily="sans-serif"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:text="01/01/2018"/>
 
         <TextView
@@ -45,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textStyle="bold"
-            android:textSize="45px"
+            android:textSize="15sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/cardview_dark_background"
             android:text="Đi uống Starbucks liên hoan Newyear"/>
@@ -64,18 +66,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/red"
-            android:gravity="right"
+            android:gravity="end"
             android:textStyle="bold"
-            android:textSize="80px"
-            android:text="-134000 đ"/>
+            android:textSize="30sp"
+            android:text="-13400 đ"/>
 
         <TextView
             android:id="@+id/tvGroupConsume"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/colorPrimary"
-            android:gravity="right"
-            android:textSize="50px"
+            android:gravity="end"
+            android:textSize="18sp"
             android:text="-560000 đ"/>
 
     </LinearLayout>
