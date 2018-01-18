@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,9 +37,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, int position) {
+    public void onBindViewHolder(CustomViewHolder holder, final int position) {
         holder.text.setImageResource(list.get(position).getAnh());
         holder.txtten.setText(list.get(position).getTen());
+        holder.checkBox.setOnCheckedChangeListener(null);
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if ( isChecked )
+                {
+                    list.get(position).setChecked(true);
+                }
+                else list.get(position).setChecked(false);
+
+            }
+        });
     }
 
     @Override
@@ -56,6 +71,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             text = itemView.findViewById(R.id.imageView);
             txtten = itemView.findViewById(R.id.txtTen);
             checkBox = itemView.findViewById(R.id.checkbox);
+
         }
     }
 }
