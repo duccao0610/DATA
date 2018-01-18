@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlActivated">#04c441</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="android:colorForeground">#33691e</item>
         <item name="colorControlNormal">#b4b0af</item>
         <item name="android:textColorSecondary">#673ab7</item>
@@ -18,7 +18,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlActivated">#04c441</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="android:colorForeground">#33691e</item>
         <item name="colorControlNormal">#b4b0af</item>
         <item name="android:textColorSecondary">#673ab7</item>
