@@ -3,11 +3,19 @@ package com.example.duccao.money_hater;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 public class ThemGiaoDichActivity extends AppCompatActivity {
+
+    RecyclerView recyclerViewThanhVien;
+    ArrayList<ThanhVien> listThanhVien;
+    RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +25,7 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         // my_child_toolbar is defined in the layout file
-        Toolbar myChildToolbar =
-                (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myChildToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myChildToolbar);
 
         // Get a support ActionBar corresponding to this toolbar
@@ -27,7 +34,18 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
+        listThanhVien = new ArrayList<>();
+        ThanhVien tv1 = new ThanhVien(R.drawable.ic_launcher_foreground, "Vu Van Duc");
+        ThanhVien tv2 = new ThanhVien(R.drawable.ic_launcher_foreground, "Cao Minh Duc");
+        listThanhVien.add(tv1);
+        listThanhVien.add(tv2);
+        recyclerViewThanhVien = findViewById(R.id.recyclerViewThanhVien);
+        recyclerViewThanhVien.setHasFixedSize(true);
+        adapter = new CustomAdapter(listThanhVien, getApplicationContext());
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewThanhVien.setLayoutManager(layoutManager);
+        recyclerViewThanhVien.setAdapter(adapter);
     }
 
     @Override
