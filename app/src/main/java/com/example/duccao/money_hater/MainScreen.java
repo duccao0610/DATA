@@ -1,5 +1,6 @@
 package com.example.duccao.money_hater;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -122,6 +123,8 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainScreen.this, "Add selected", Toast.LENGTH_SHORT).show();
+                Intent intentAdd = new Intent(MainScreen.this, ThemGiaoDichActivity.class);
+                startActivity(intentAdd);
             }
         });
 
