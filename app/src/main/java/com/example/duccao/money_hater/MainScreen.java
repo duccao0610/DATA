@@ -196,7 +196,8 @@ public class MainScreen extends AppCompatActivity {
                                             tmp.getTitle(),
                                             tmp.getMoney()+"",
                                             tmp.getGmoney() + "",
-                                            false);
+                                            false,
+                                            10);
                                     listItem.add(item);
                                 }
                             }
