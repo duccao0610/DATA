@@ -33,6 +33,7 @@ public class AddGroupActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rvAddMember);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         btnAdd = findViewById(R.id.btnAddMember);
         btnSave = findViewById(R.id.btnSaveAddGroup);
@@ -46,6 +47,7 @@ public class AddGroupActivity extends AppCompatActivity {
                 if(!memberNameTemp.isEmpty()){
                     AddMemberItem item = new AddMemberItem(R.drawable.icon_bitcoin, memberNameTemp, "temp@mail.com");
                     listItem.add(item);
+                    adapter.notifyDataSetChanged();
                     etAddMember.setText("");
                 }
             }
@@ -65,7 +67,7 @@ public class AddGroupActivity extends AppCompatActivity {
                 ///list temp
         listItem = new ArrayList<>();
         AddMemberItem item1 = new AddMemberItem(R.drawable.icon_bitcoin, "Tran Tuan Anh", "t.tuananh112@gmail.com");
-        AddMemberItem item2 = new AddMemberItem(R.drawable.icon_bitcoin, "Nguyen Hoang Anh", "t.tuananh112@gmail.com");
+        AddMemberItem item2 = new AddMemberItem(R.drawable.icon_bitcoin, "Pham Hoang Anh", "t.tuananh112@gmail.com");
         AddMemberItem item3 = new AddMemberItem(R.drawable.icon_bitcoin, "Vu Van Duc", "t.tuananh112@gmail.com");
         AddMemberItem item4 = new AddMemberItem(R.drawable.icon_bitcoin, "Nguyen Duc Thinh", "t.tuananh112@gmail.com");
         AddMemberItem item5 = new AddMemberItem(R.drawable.icon_bitcoin, "Cao Minh Cop", "t.tuananh112@gmail.com");
@@ -84,7 +86,6 @@ public class AddGroupActivity extends AppCompatActivity {
 
         adapter = new AddMemberLayoutAdapter(this, listItem);
         recyclerView.setAdapter(adapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
     }
 }
