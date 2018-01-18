@@ -13,14 +13,16 @@ public class MainScreenItem {
     private String personalConsume;
     private String groupConsume;
     private boolean out;
+    private int numberOfPeople;
 
-    public MainScreenItem(int avatar, String time, String content, String personalConsume, String groupConsume, boolean out) {
+    public MainScreenItem(int avatar, String time, String content, String personalConsume, String groupConsume, boolean out, int numberOfPeople) {
         this.avatar = avatar;
         this.time = time;
         this.content = content;
         this.personalConsume = personalConsume;
         this.groupConsume = groupConsume;
         this.out = out;
+        this.numberOfPeople = numberOfPeople;
     }
 
     public int getAvatar() {
@@ -45,5 +47,9 @@ public class MainScreenItem {
 
     public boolean isOut() {
         return out;
+    }
+
+    public int getNumberOfPeople() {
+        return numberOfPeople;
     }
 }

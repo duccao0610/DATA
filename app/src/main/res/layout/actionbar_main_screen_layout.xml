@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent">
 
         <ImageView
@@ -47,21 +47,21 @@
         android:layout_width="60dp"
         android:src="@drawable/icon_notification"
         android:id="@+id/ivNotificationAB"
-        android:layout_toLeftOf="@+id/ivMenuAB"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/ivMenuAB"
-        style="?android:borderlessButtonStyle"/>
-
-
-
-    <ImageView
-        android:layout_height="30dp"
-        android:layout_width="30dp"
-        android:src="@drawable/icon_menu"
-        android:id="@+id/ivMenuAB"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        style="?android:borderlessButtonStyle"
         android:layout_alignParentEnd="true" />
+
+
+
+    <!--<ImageView-->
+        <!--android:layout_height="25dp"-->
+        <!--android:layout_width="25dp"-->
+        <!--android:src="@drawable/icon_menu"-->
+        <!--android:id="@+id/ivMenuAB"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
 
 
 </RelativeLayout>

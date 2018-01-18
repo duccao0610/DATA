@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -66,7 +67,7 @@ public class MainScreen extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         usersref = FirebaseDatabase.getInstance().getReference("users").child(uid);
 
-//        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
 
 
         //setup action bar
@@ -85,7 +86,6 @@ public class MainScreen extends AppCompatActivity {
         ivGroupAB = customView.findViewById(R.id.ivGroupAB);
         tvCashAB = customView.findViewById(R.id.tvCashAB);
         ivNotificationAB = customView.findViewById(R.id.ivNotificationAB);
-        ivMenuAB = customView.findViewById(R.id.ivMenuAB);
 
         ivGroupAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,12 +107,7 @@ public class MainScreen extends AppCompatActivity {
                 Toast.makeText(MainScreen.this, "Notification selected", Toast.LENGTH_SHORT).show();
             }
         });
-        ivMenuAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainScreen.this, "Menu selected", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         ////////////
 
@@ -159,21 +154,21 @@ public class MainScreen extends AppCompatActivity {
         listItem = new ArrayList<>();
         //list Temp
         MainScreenItem item1 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
+                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true, 1);
         MainScreenItem item2 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
+                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false, 2);
         MainScreenItem item3 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
+                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true, 3);
         MainScreenItem item4 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
+                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false, 4);
         MainScreenItem item5 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
+                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true, 5);
         MainScreenItem item6 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
+                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false, 6);
         MainScreenItem item7 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
+                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true, 7);
         MainScreenItem item8 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
+                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false, 8);
 
         listItem.add(item1);
         listItem.add(item2);
@@ -191,6 +186,33 @@ public class MainScreen extends AppCompatActivity {
         adapter = new MainScreenLayoutAdapter(this, listItem);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mainHelp:
+                Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.mainAbout:
+                Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.mainLogOut:
+                Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.mainExit:
+                Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+        }
+        return super.onOptionsItemSelected(item);
     }
     
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:title="Help" android:id="@+id/mainHelp"/>
+        <item android:title="About us" android:id="@+id/mainAbout"/>
+        <item android:title="Log out" android:id="@+id/mainLogOut"/>
+        <item android:title="Exit" android:id="@+id/mainExit"/>
+    </group>
+</menu>
