@@ -101,13 +101,13 @@
     <Button
         android:clickable="true"
         android:layout_below="@+id/recycler_view"
-        android:id="@+id/btn_join"
+        android:id="@+id/btn_addGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:background="@null"
-        android:text="@string/join_grp"
+        android:text="@string/add_grp"
         android:textColor="@color/colorPrimary" />
 
 

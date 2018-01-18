@@ -90,7 +90,7 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainScreen.this, "Group selected", Toast.LENGTH_SHORT).show();
-                Intent intentGroupChange = new Intent(MainScreen.this, AddGroupActivity.class);
+                Intent intentGroupChange = new Intent(MainScreen.this, ChooseGroupActivity.class);
                 startActivity(intentGroupChange);
             }
         });

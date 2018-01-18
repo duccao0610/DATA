@@ -1,10 +1,13 @@
 package com.example.duccao.money_hater;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +18,15 @@ public class ChooseGroupActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GroupsAdapter groupsAdapter;
 
+    private Button btnAddGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_group);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        btnAddGroup = findViewById(R.id.btn_addGroup);
 
         groupsAdapter = new GroupsAdapter(groupsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -29,6 +35,15 @@ public class ChooseGroupActivity extends AppCompatActivity {
         recyclerView.setAdapter(groupsAdapter);
 
         GroupData();
+
+        btnAddGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentAddGroup = new Intent(ChooseGroupActivity.this, AddGroupActivity.class);
+                finish();
+                startActivity(intentAddGroup);
+            }
+        });
     }
 
     private void GroupData(){

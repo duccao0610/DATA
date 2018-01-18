@@ -64,7 +64,7 @@
             android:theme="@style/ActionBarTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ChooseGroupActivity" />
+                android:value=".MainScreen" />
         </activity>
         <activity android:name=".ChooseGroupActivity">
             <meta-data
