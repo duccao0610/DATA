@@ -34,7 +34,7 @@
             android:id="@+id/tvTimePost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/gray"
             android:textStyle="italic"
             android:fontFamily="sans-serif"
             android:layout_gravity="left"
