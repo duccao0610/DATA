@@ -19,6 +19,7 @@ public class ChooseGroupActivity extends AppCompatActivity {
     private GroupsAdapter groupsAdapter;
 
     private Button btnAddGroup;
+    private Button btnClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class ChooseGroupActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         btnAddGroup = findViewById(R.id.btn_addGroup);
+        btnClose = findViewById(R.id.btn_close);
 
         groupsAdapter = new GroupsAdapter(groupsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -42,6 +44,15 @@ public class ChooseGroupActivity extends AppCompatActivity {
                 Intent intentAddGroup = new Intent(ChooseGroupActivity.this, AddGroupActivity.class);
                 finish();
                 startActivity(intentAddGroup);
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentClose = new Intent(ChooseGroupActivity.this,MainScreen.class);
+                finish();
+                startActivity(intentClose);
             }
         });
     }
