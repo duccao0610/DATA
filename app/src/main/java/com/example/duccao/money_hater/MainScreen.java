@@ -87,7 +87,6 @@ public class MainScreen extends AppCompatActivity {
         ivGroupAB = customView.findViewById(R.id.ivGroupAB);
         tvCashAB = customView.findViewById(R.id.tvCashAB);
         ivNotificationAB = customView.findViewById(R.id.ivNotificationAB);
-        ivMenuAB = customView.findViewById(R.id.ivMenuAB);
 
         ivGroupAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,12 +108,7 @@ public class MainScreen extends AppCompatActivity {
                 Toast.makeText(MainScreen.this, "Notification selected", Toast.LENGTH_SHORT).show();
             }
         });
-        ivMenuAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainScreen.this, "Menu selected", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         ////////////
 
@@ -202,7 +196,8 @@ public class MainScreen extends AppCompatActivity {
                                             tmp.getTitle(),
                                             tmp.getMoney()+"",
                                             tmp.getGmoney() + "",
-                                            false);
+                                            false,
+                                            10);
                                     listItem.add(item);
                                 }
                             }
@@ -235,5 +230,32 @@ public class MainScreen extends AppCompatActivity {
 
 
     }
-    
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mainHelp:
+                Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.mainAbout:
+                Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.mainLogOut:
+                Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.mainExit:
+                Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

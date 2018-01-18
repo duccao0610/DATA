@@ -42,6 +42,7 @@ public class MainScreenLayoutAdapter extends RecyclerView.Adapter<MainScreenView
                     Toast.makeText(context, pos + " selected", Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
     }
 
