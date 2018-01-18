@@ -37,5 +37,6 @@
     </array>
 
     <color name="red">#b90000</color>
+    <color name="gray">#737373</color>
 
 </resources>
