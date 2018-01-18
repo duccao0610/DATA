@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class MainScreen extends AppCompatActivity {
     private DatabaseReference usersref;
 
-    private LinearLayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private MainScreenLayoutAdapter adapter;
 
@@ -66,7 +66,8 @@ public class MainScreen extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         usersref = FirebaseDatabase.getInstance().getReference("users").child(uid);
 
-        recyclerView.setHasFixedSize(true);
+//        recyclerView.setHasFixedSize(true);
+
 
         //setup action bar
         //////////////////
@@ -186,7 +187,6 @@ public class MainScreen extends AppCompatActivity {
 //
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         adapter = new MainScreenLayoutAdapter(this, listItem);
         recyclerView.setAdapter(adapter);

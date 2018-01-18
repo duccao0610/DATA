@@ -28,10 +28,12 @@
             android:layout_marginRight="0.5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_left"
             android:orientation="vertical"
             android:padding="15dp"
-            android:layout_marginEnd="0.5dp">
+            android:layout_marginEnd="0.5dp"
+            android:background="@drawable/shape_left_style"
+            android:focusable="true"
+            android:clickable="true">
 
             <TextView
                 android:layout_width="match_parent"
@@ -58,10 +60,12 @@
             android:layout_marginLeft="0.5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_right"
             android:orientation="vertical"
             android:padding="15dp"
-            android:layout_marginStart="0.5dp">
+            android:layout_marginStart="0.5dp"
+            android:background="@drawable/shape_right_style"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:layout_width="match_parent"
