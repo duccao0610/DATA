@@ -17,6 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 /**
@@ -41,6 +48,8 @@ public class MainScreen extends AppCompatActivity {
     private TextView tvTotalGroupSpent;
     private TextView tvSpentWithGroup;
 
+    private DatabaseReference usersRef;
+
     private FloatingActionButton btnAdd;
 
     @Override
@@ -48,6 +57,7 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        usersRef = FirebaseDatabase.getInstance().getReference("users").child("d3CmH5P3Bie1HI61A88BH3BoX1A2");
         recyclerView = findViewById(R.id.rvMainScreen);
         btnTotalGroupSpent = findViewById(R.id.btnTotalGroupSpent);
         btnSpentWithGroup = findViewById(R.id.btnSpentWithGroup);
@@ -164,6 +174,24 @@ public class MainScreen extends AppCompatActivity {
         adapter = new MainScreenLayoutAdapter(this, listItem);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User current = dataSnapshot.getValue(User.class);
+                tvCashAB.setText(current.getCash() + "");
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
     
 }
