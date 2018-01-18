@@ -18,6 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 /**
@@ -25,6 +32,7 @@ import java.util.ArrayList;
  */
 
 public class MainScreen extends AppCompatActivity {
+    private DatabaseReference usersref;
 
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
@@ -55,6 +63,8 @@ public class MainScreen extends AppCompatActivity {
         tvTotalGroupSpent = findViewById(R.id.tvTotalGroupSpent);
         tvSpentWithGroup = findViewById(R.id.tvSpentWithGroup);
         btnAdd = findViewById(R.id.btnAddMainScreen);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        usersref = FirebaseDatabase.getInstance().getReference("users").child(uid);
 
         recyclerView.setHasFixedSize(true);
 
@@ -130,6 +140,18 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
+        usersref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User current = dataSnapshot.getValue(User.class);
+                tvCashAB.setText(current.getCash() + "");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
 
 
 
