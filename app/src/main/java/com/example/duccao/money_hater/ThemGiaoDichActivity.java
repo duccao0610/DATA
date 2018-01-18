@@ -35,8 +35,8 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         listThanhVien = new ArrayList<>();
-        ThanhVien tv1 = new ThanhVien(R.drawable.ic_launcher_foreground, "Vu Van Duc");
-        ThanhVien tv2 = new ThanhVien(R.drawable.ic_launcher_foreground, "Cao Minh Duc");
+        ThanhVien tv1 = new ThanhVien(R.drawable.intro1, "Vu Van Duc");
+        ThanhVien tv2 = new ThanhVien(R.drawable.intro2, "Cao Minh Duc");
         listThanhVien.add(tv1);
         listThanhVien.add(tv2);
         recyclerViewThanhVien = findViewById(R.id.recyclerViewThanhVien);

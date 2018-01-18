@@ -9,24 +9,25 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:src="@drawable/user"
-        android:layout_weight="2"
+        android:src="@drawable/intro3"
+        android:layout_weight="1"
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="100dp" />
+        android:layout_height="60dp" />
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:textColor="@color/colorPrimary"
         android:textSize="25sp"
         android:text="Ho ten"
         android:id="@+id/txtTen"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:layout_width="0dp"
-        android:layout_height="100dp" />
+        android:layout_height="60dp" />
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="100dp" />
+        android:layout_height="60dp" />
 </LinearLayout>
