@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Tran Tuan Anh on 1/17/2018.
@@ -26,6 +27,7 @@ public class MainScreenViewHolder extends RecyclerView.ViewHolder {
         tvContent = itemView.findViewById(R.id.tvContentPost);
         tvPersonalConsume = itemView.findViewById(R.id.tvPersonalConsume);
         tvGroupConsume = itemView.findViewById(R.id.tvGroupConsume);
+
     }
 
     public void bindItem(MainScreenItem newItem){

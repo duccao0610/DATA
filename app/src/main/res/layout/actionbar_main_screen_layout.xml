@@ -4,8 +4,8 @@
     android:layout_height="fill_parent">
 
     <ImageView
-        android:layout_height="80px"
-        android:layout_width="80px"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
         android:src="@drawable/icon_wallet"
         android:id="@+id/ivGroupAB"
         android:layout_centerVertical="true"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_marginTop="30px"
+        android:layout_marginTop="15dp"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="60px"
+            android:textSize="20sp"
             android:textColor="#000000"
             android:layout_marginTop="-10px"
             android:layout_gravity="center"
@@ -42,20 +42,20 @@
 
 
     <ImageView
-        android:layout_height="140px"
-        android:layout_width="140px"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
         android:src="@drawable/icon_notification"
         android:id="@+id/ivNotificationAB"
         android:layout_toLeftOf="@+id/ivMenuAB"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/ivMenuAB"
-        android:paddingRight="20px"/>
+        android:paddingRight="10dp"/>
 
 
 
     <ImageView
-        android:layout_height="80px"
-        android:layout_width="80px"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
         android:src="@drawable/icon_menu"
         android:id="@+id/ivMenuAB"
         android:layout_alignParentRight="true"

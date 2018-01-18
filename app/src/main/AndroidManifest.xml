@@ -11,11 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-        <activity android:name=".LogInActivity">
-
-        </activity>
+        <activity android:name=".LogInActivity"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -37,7 +33,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        
         <activity android:name=".SignInActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPasswordActivity" />
@@ -48,17 +43,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainScreen" android:theme="@style/FullscreenTheme"/>
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".MainScreen"
+            android:theme="@style/ActionBarTheme"
+            android:launchMode="singleTop"/>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".ThemGiaoDichActivity"
-            android:label="@string/themgiaodich"
-            android:parentActivityName=".MainActivity" >
+            android:label="@string/themgiaodich">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".MainScreen" />
+        </activity>
+
+        <activity
+            android:name=".AddGroupActivity"
+            android:label="Add group"
+            android:theme="@style/ActionBarTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainScreen" />
         </activity>
     </application>
 

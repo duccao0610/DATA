@@ -80,6 +80,8 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainScreen.this, "Group selected", Toast.LENGTH_SHORT).show();
+                Intent intentGroupChange = new Intent(MainScreen.this, AddGroupActivity.class);
+                startActivity(intentGroupChange);
             }
         });
         tvCashAB.setOnClickListener(new View.OnClickListener() {
