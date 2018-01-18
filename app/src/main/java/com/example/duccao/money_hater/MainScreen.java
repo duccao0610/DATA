@@ -32,7 +32,7 @@ import java.util.ArrayList;
  */
 
 public class MainScreen extends AppCompatActivity {
-    private DatabaseReference usersref;
+    private DatabaseReference usersref, groupsref, relationsref, paymentsRef;
 
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
@@ -63,8 +63,11 @@ public class MainScreen extends AppCompatActivity {
         tvTotalGroupSpent = findViewById(R.id.tvTotalGroupSpent);
         tvSpentWithGroup = findViewById(R.id.tvSpentWithGroup);
         btnAdd = findViewById(R.id.btnAddMainScreen);
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         usersref = FirebaseDatabase.getInstance().getReference("users").child(uid);
+        groupsref = FirebaseDatabase.getInstance().getReference("groups");
+        relationsref = FirebaseDatabase.getInstance().getReference("relations");
+        paymentsRef = FirebaseDatabase.getInstance().getReference("payments");
 
         recyclerView.setHasFixedSize(true);
 
@@ -153,44 +156,84 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
+        relationsref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean haveGroup = false;
+                long gid = 0;
+                for (DataSnapshot relationSnapshot : dataSnapshot.getChildren()){
+                    if(relationSnapshot.child("uid").getValue(String.class).equals(uid)){
+                        gid = relationSnapshot.child("gid").getValue(Long.class);
+                        final long gid1 = gid;
+                        groupsref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot2) {
+                                Group tmp = dataSnapshot2.child(String.valueOf(gid1)).getValue(Group.class);
+                                tvTotalGroupSpent.setText((double)tmp.getTotal()/1000+"k");
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+
+                            }
+                        });
 
 
-        listItem = new ArrayList<>();
-        //list Temp
-        MainScreenItem item1 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
-        MainScreenItem item2 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
-        MainScreenItem item3 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
-        MainScreenItem item4 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
-        MainScreenItem item5 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
-        MainScreenItem item6 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
-        MainScreenItem item7 = new MainScreenItem(R.drawable.profile_icon,
-                "1/1/2018","Đi uống Starbucks liên hoan NewYear", "-134k đ", "-560.000 đ", true);
-        MainScreenItem item8 = new MainScreenItem(R.drawable.profile_icon,
-                "2/1/2018","Thu tiền quỹ tháng 1/2018", "-60k đ", "+1.280.000 đ", false);
+                        tvSpentWithGroup.setText((double)(relationSnapshot.child("spentwith").getValue(Long.class))/1000+"k");
+                        haveGroup = true;
+                        break;
+                    }
+                }
+                if (!haveGroup){
+                    tvTotalGroupSpent.setText("NO GROUP");
+                    tvSpentWithGroup.setText("NO GROUP");
+                }
+                else {
+                    listItem = new ArrayList<>();
+                    final long gid2 = gid;
+                    paymentsRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot3) {
+                            for (DataSnapshot paymentSnapshot : dataSnapshot3.getChildren()){
+                                if(paymentSnapshot.child("gid").getValue(Long.class) == gid2){
+                                    Payment tmp = paymentSnapshot.getValue(Payment.class);
+                                    MainScreenItem item = new MainScreenItem(R.drawable.profile_icon,
+                                            tmp.getDate(),
+                                            tmp.getTitle(),
+                                            tmp.getMoney()+"",
+                                            tmp.getGmoney() + "",
+                                            false);
+                                    listItem.add(item);
+                                }
+                            }
+                            layoutManager = new LinearLayoutManager(MainScreen.this);
+                            recyclerView.setLayoutManager(layoutManager);
+                            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        listItem.add(item1);
-        listItem.add(item2);
-        listItem.add(item3);
-        listItem.add(item4);
-        listItem.add(item5);
-        listItem.add(item6);
-        listItem.add(item7);
-        listItem.add(item8);
+                            adapter = new MainScreenLayoutAdapter(MainScreen.this, listItem);
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        }
 
-//
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                        @Override
+                        public void onCancelled(DatabaseError error) {
 
-        adapter = new MainScreenLayoutAdapter(this, listItem);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        }
+                    });
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+
+
     }
     
 }
