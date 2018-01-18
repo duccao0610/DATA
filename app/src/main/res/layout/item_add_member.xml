@@ -27,7 +27,7 @@
             android:text="tuananh112"
             android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
         <TextView
