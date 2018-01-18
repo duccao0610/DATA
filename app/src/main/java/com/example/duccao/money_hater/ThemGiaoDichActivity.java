@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,9 +68,11 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_favorite:
+            case R.id.action_save:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
+                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(ThemGiaoDichActivity.this,)
                 return true;
 
             default:
