@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <activity android:name=".LogInActivity">
 
         </activity>
@@ -36,19 +37,29 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".MainScreen"/>-->
+        
         <activity android:name=".SignInActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".MainScreen" android:theme="@style/FullscreenTheme">
+        <activity android:name=".WelcomeActivity" android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".MainActivity"/>-->
+        <activity android:name=".MainScreen"/>
+        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".ThemGiaoDichActivity"
+            android:label="@string/themgiaodich"
+            android:parentActivityName=".MainActivity" >
 
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
 
 </manifest>

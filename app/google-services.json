@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "245953278962",
+    "firebase_url": "https://money-hater.firebaseio.com",
+    "project_id": "money-hater",
+    "storage_bucket": "money-hater.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245953278962:android:e6e13bea5d6c2a8a",
+        "android_client_info": {
+          "package_name": "com.example.duccao.money_hater"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245953278962-o62lb8p00v2be3rlt55f2c8farjhtcoa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.duccao.money_hater",
+            "certificate_hash": "a703341d6c308f427dd814caa4f18f97593c4d47"
+          }
+        },
+        {
+          "client_id": "245953278962-bcqi3s36f59rsfufnf25a43ovtdcfshj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7qxf4UFlcjAWIa0HhT_Tnym3GLJTYVvc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245953278962-bcqi3s36f59rsfufnf25a43ovtdcfshj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
