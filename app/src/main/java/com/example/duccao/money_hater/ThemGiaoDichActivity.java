@@ -3,6 +3,7 @@ package com.example.duccao.money_hater;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -39,12 +40,21 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
         ThanhVien tv2 = new ThanhVien(R.drawable.intro2, "Cao Minh Duc");
         listThanhVien.add(tv1);
         listThanhVien.add(tv2);
+        listThanhVien.add(tv1);
+        listThanhVien.add(tv1);
+        listThanhVien.add(tv1);
+        listThanhVien.add(tv1);
+        listThanhVien.add(tv1);
+        listThanhVien.add(tv1);
+        listThanhVien.add(tv1);
         recyclerViewThanhVien = findViewById(R.id.recyclerViewThanhVien);
         recyclerViewThanhVien.setHasFixedSize(true);
         adapter = new CustomAdapter(listThanhVien, getApplicationContext());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewThanhVien.setLayoutManager(layoutManager);
+        DividerItemDecoration decoration = new DividerItemDecoration(this, layoutManager.getOrientation());
+        recyclerViewThanhVien.addItemDecoration(decoration);
         recyclerViewThanhVien.setAdapter(adapter);
     }
 
