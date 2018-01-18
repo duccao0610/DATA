@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#44BEC7</color>
+    <color name="colorSecondary">#09AEA0</color>
     <color name="colorPrimaryDark">#f5f5f7</color>
     <color name="colorAccent">#FF4081</color>
 
@@ -36,6 +37,7 @@
         <item>@color/dot_dark_screen4</item>
     </array>
 
+    <color name="light_red">#FF0000</color>
     <color name="red">#b90000</color>
     <color name="gray">#737373</color>
     <color name="black">#000000</color>

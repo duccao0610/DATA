@@ -9,16 +9,18 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:layout_gravity="center"
         android:src="@drawable/intro3"
         android:layout_weight="1"
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="60dp" />
+        android:layout_height="30dp" />
 
     <TextView
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:textColor="@color/colorPrimary"
-        android:textSize="25sp"
+        android:textSize="18dp"
         android:text="Ho ten"
         android:id="@+id/txtTen"
         android:layout_weight="4"
