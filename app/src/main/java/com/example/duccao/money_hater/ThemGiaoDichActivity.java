@@ -21,8 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class ThemGiaoDichActivity extends AppCompatActivity {
@@ -130,7 +132,11 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
         try {
             final long Sum = Long.parseLong(tongTien.getText().toString());
             final String content = title.getText().toString();
-            final String date = Calendar.getInstance().getTime().toString();
+            final Date d = new Date();
+            /////
+            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+            final String date = dateFormat.format(d);
+
             final long each = Sum/Selected.size();
 
             groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
