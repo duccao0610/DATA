@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class ThemGiaoDichActivity extends AppCompatActivity {
 
@@ -145,6 +146,7 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
             });
 
             for(final ThanhVien tv : Selected){
+                Log.d("", "process: " + Selected.size());
                 usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -155,11 +157,9 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
                                 paymentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        long count = dataSnapshot.getChildrenCount() + 1;
                                         Payment tmp = new Payment(date, content, userSnapshot.getKey().toString(), each, gid, Sum);
-                                        paymentsRef.child(count+"").setValue(tmp);
+                                        paymentsRef.push().setValue(tmp);
                                     }
-
                                     @Override
                                     public void onCancelled(DatabaseError error) {
 
