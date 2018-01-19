@@ -8,29 +8,37 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseGroupActivity extends AppCompatActivity {
 
-    private List<Groups> groupsList = new ArrayList<>();
+    private ArrayList<Groups> groupsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private GroupsAdapter groupsAdapter;
 
     private Button btnAddGroup;
     private Button btnClose;
+    private Button btnAddMember;
+
+    private TextView tvGroupChosen;
+    private TextView tvBioGroupChosen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_group);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         btnAddGroup = findViewById(R.id.btn_addGroup);
         btnClose = findViewById(R.id.btn_close);
+        tvGroupChosen = findViewById(R.id.tvGroupChosen);
+        tvBioGroupChosen = findViewById(R.id.tvBioGroupChosen);
+        btnAddMember = findViewById(R.id.btnAddMember2Grp);
 
-        groupsAdapter = new GroupsAdapter(groupsList);
+        groupsAdapter = new GroupsAdapter(groupsList, tvGroupChosen, tvBioGroupChosen, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -42,7 +50,6 @@ public class ChooseGroupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentAddGroup = new Intent(ChooseGroupActivity.this, AddGroupActivity.class);
-                finish();
                 startActivity(intentAddGroup);
             }
         });
@@ -53,6 +60,14 @@ public class ChooseGroupActivity extends AppCompatActivity {
                 Intent intentClose = new Intent(ChooseGroupActivity.this,MainScreen.class);
                 finish();
                 startActivity(intentClose);
+            }
+        });
+
+        btnAddMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentAddMember = new Intent(ChooseGroupActivity.this, AddMemberActivity.class);
+                startActivity(intentAddMember);
             }
         });
     }

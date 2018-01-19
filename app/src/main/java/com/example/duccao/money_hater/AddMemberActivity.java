@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AddGroupActivity extends AppCompatActivity {
+public class AddMemberActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AddMemberLayoutAdapter adapter;
@@ -30,12 +30,12 @@ public class AddGroupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_group);
+        setContentView(R.layout.activity_add_member);
 
-        recyclerView = findViewById(R.id.rvAddMember);
-        btnAdd = findViewById(R.id.btnAddMember);
-        btnSave = findViewById(R.id.btnSaveAddGroup);
-        etAddMember = findViewById(R.id.etSearchAddMember);
+        recyclerView = findViewById(R.id.rvAddMember1);
+        btnAdd = findViewById(R.id.btnAddMember1);
+        btnSave = findViewById(R.id.btnSaveMember1);
+        etAddMember = findViewById(R.id.etAddMember1);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,19 +51,16 @@ public class AddGroupActivity extends AppCompatActivity {
             }
         });
 
-        //save nho get name, value .... cua group
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AddGroupActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddMemberActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 finish();
-                Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
+                Intent intentChooseGrp = new Intent(AddMemberActivity.this, ChooseGroupActivity.class);
                 startActivity(intentChooseGrp);
             }
         });
 
-
-                ///list temp
         listItem = new ArrayList<>();
         AddMemberItem item1 = new AddMemberItem(R.drawable.icon_bitcoin, "Tran Tuan Anh", "t.tuananh112@gmail.com");
         AddMemberItem item2 = new AddMemberItem(R.drawable.icon_bitcoin, "Pham Hoang Anh", "t.tuananh112@gmail.com");

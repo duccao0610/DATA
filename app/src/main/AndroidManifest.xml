@@ -63,13 +63,22 @@
             android:theme="@style/ActionBarTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainScreen" />
+                android:value=".ChooseGroupActivity" />
         </activity>
         <activity android:name=".ChooseGroupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
+
+        <activity android:name=".AddMemberActivity"
+            android:label="Add members"
+            android:theme="@style/ActionBarTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ChooseGroupActivity" />
+        </activity>
+
         <activity android:name=".HelpActivity"></activity>
     </application>
 
