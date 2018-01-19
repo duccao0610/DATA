@@ -13,7 +13,20 @@
     <string name="submit">Submit</string>
     <string name="themgiaodich">Add transaction</string>
     <string name="tieude">Title</string>
+    <string name="help">Help</string>
+    <string name="feedback">Feedback</string>
+    <string name="feedback_greet">Your feedback is very important to us. Lets build a better Money Hater together.</string>
+    <string name="about" translatable="false">This is DATAs project. We are Hoang Anh, Tuan Anh, Minh Duc, Van Duc, Duc Thinh. Thanks Mr.Thuan and Mr.Quang for helping us.</string>
     <string name="noidung">Details</string>
+    <string name="contact">Contact</string>
+    <string name="privacy">Privacy</string>
+    <string name="question">Question</string>
+    <string name="privacy_title">Your data is absolutely safe!</string>
+    <string name="privacy_content">Your data is always safe with us. We will never give your information to anyone. We are using Google Cloud services - the biggest hosting service - which is trusted by thousands of companies and banks.</string>
+    <string name="question1">Can I use Money Hater in other devices?</string>
+    <string name="answer1">Yes, in case you are registered Money Hater account. You only need to log in other devices to continue use Money Hater. But we only support Android, sorry about that.</string>
+    <string name="question2">How to change my email account?</string>
+    <string name="answer2">Please contact us by sending an email with your new email to contact@moneyhater.com. We will answer you within 12 hours. Please notice that we can not change your email belong with your account if you log in through Facebook account.</string>
 
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>

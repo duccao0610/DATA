@@ -21,4 +21,22 @@
     <string name="slide_3_desc">Hàng chục tính năng</string>
     <string name="tieude">Tiêu đề</string>
     <string name="noidung">Chi tiết</string>
+    <string name="help">Giúp đỡ</string>
+    <string name="feedback">Góp ý</string>
+    <string name="feedback_greet">Góp ý của bạn vô cùng quan trọng đối với chúng tôi. Hãy cùng nhau xây dựng tốt hơn Money Hater.</string>
+    <string name="privacy">Bảo mật</string>
+    <string name="question">Thắc mắc hay gặp</string>
+    <string name="privacy_title">Tất cả dữ liệu của bạn đều được bảo vệ an toàn</string>
+    <string name="privacy_content">Dữ liệu của bạn luôn luôn an toàn. Chúng tôi không bao giờ tiết lộ thông tin của bạn cho bên thứ ba nào. Chúng tôi đang sử dụng dịch vụ Google Cloud được hàng ngàn công ty và ứng dụng tin dùng.</string>
+    <string name="question1">Tôi có thể sử dụng Money Hater trên các thiết bị khác</string>
+    <string name="answer1">Tất nhiên khi bạn đăng ký một tài khoản Money Hater. Bạn chỉ cần đăng nhập trên thiết bị mới. Tuy nhiên chúng tôi mới chỉ hỗ trợ nền tảng Android. Chúng tôi xin lối vì sự bất tiện này. Chúng tôi sẽ cố gắng phát triển Money Hater trên các nền tảng khác trong thời gian tới.</string>
+    <string name="question2">Tôi có thể thay đổi email tài khoản như thế nào?</string>
+    <string name="answer2">Xin hãy liên lạc với chúng tôi bằng cách gửi một email có địa chỉ email mới của bạn tới hòm thư hỗ trợ contact@moneyhater.com. Chúng tôi sẽ trả lời bạn trong vòng 12 giờ. Xin hãy chú ý rằng bạn không thể thay đổi email đi kèm với tài khoản facebook của bạn nếu bạn đăng nhập bằng facebook.</string>
+    <string name="close">ĐÓNG</string>
+    <string name="edit">CHỈNH SỬA</string>
+    <string name="select_grp">CHỌN NHÓM</string>
+    <string name="create_grp">Tạo nhóm</string>
+    <string name="add_grp">Thêm nhóm</string>
+    <string name="sum">TỔNG</string>
+    <string name="amount">Tổng tiền</string>
 </resources>

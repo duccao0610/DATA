@@ -180,10 +180,12 @@ public class MainScreen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mainHelp:
-                Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show();
+                Intent intentHelp = new Intent(MainScreen.this, HelpActivity.class);
+                startActivity(intentHelp);
                 break;
             case R.id.mainAbout:
-                Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
+                Intent intentAbout = new Intent(MainScreen.this, AboutActivity.class);
+                startActivity(intentAbout);
                 break;
             case R.id.mainLogOut:
                 Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
