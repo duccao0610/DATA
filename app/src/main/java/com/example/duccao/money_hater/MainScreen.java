@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -161,6 +162,14 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Intent intentChange = new Intent(this, SignInActivity.class);
+            startActivity(intentChange);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -179,6 +188,9 @@ public class MainScreen extends AppCompatActivity {
                 break;
             case R.id.mainLogOut:
                 Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent intentChange = new Intent(MainScreen.this, SignInActivity.class);
+                startActivity(intentChange);
                 break;
             case R.id.mainExit:
                 Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
