@@ -1,9 +1,11 @@
 package com.example.duccao.money_hater;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -53,26 +55,50 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    private boolean check(){
+        TextInputLayout til = (TextInputLayout) findViewById(R.id.email_til);
+        TextInputEditText tiet = (TextInputEditText) findViewById(R.id.edtEmail);
+        TextInputLayout til_pass = findViewById(R.id.password_til);
+        EditText edtPass = findViewById(R.id.edtPassword);
+        if(tiet.getText().toString().trim().isEmpty()){
+            til.setError("Please enter valid email.");
+            return false;
+        }else{
+            til.setError(null);
+            if(edtPass.getText().toString().trim().isEmpty()){
+                til_pass.setError("Please enter your password");
+                return false;
+            }
+            else {
+                til_pass.setError(null);
+                return true;
+            }
+        }
+
+    }
+
     private void Register(){
-        email = findViewById(R.id.edtEmail);
-        pass = findViewById(R.id.edtPassword);
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+        if(check()){
+            email = findViewById(R.id.edtEmail);
+            pass = findViewById(R.id.edtPassword);
+            mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     private void updateUI(FirebaseUser user) {

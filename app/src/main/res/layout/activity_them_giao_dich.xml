@@ -10,9 +10,6 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -23,6 +20,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/edtTongtien"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

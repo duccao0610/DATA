@@ -2,6 +2,7 @@ package com.example.duccao.money_hater;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -194,7 +195,12 @@ public class MainScreen extends AppCompatActivity {
                 startActivity(intentChange);
                 break;
             case R.id.mainExit:
-                Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainScreen.class);
+                startActivity(intent);
+                Intent startMain = new Intent(Intent.ACTION_MAIN);
+                startMain.addCategory(Intent.CATEGORY_HOME);
+                startActivity(startMain);
+                finish();
                 break;
             default:
         }
@@ -270,7 +276,8 @@ public class MainScreen extends AppCompatActivity {
                                                 0 + "",
                                                 tmp.getGmoney() + "",
                                                 true,
-                                                tmp.getGmoney() / tmp.getMoney() - 1);
+                                                tmp.getGmoney() / tmp.getMoney());
+                                        //cai numberOfPeople nay phai -1 nhe vi k tinh nguoi post
                                         listItem.add(item);
                                     }
                                 }

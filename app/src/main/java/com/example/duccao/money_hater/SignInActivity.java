@@ -62,28 +62,52 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private void SignIn() {
-        email = findViewById(R.id.edtEmail);
-        pass = findViewById(R.id.edtPassword);
-        mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(SignInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+    private boolean check(){
+        TextInputLayout til = (TextInputLayout) findViewById(R.id.email_til);
+        TextInputEditText tiet = (TextInputEditText) findViewById(R.id.edtEmail);
+        TextInputLayout til_pass = findViewById(R.id.password_til);
+        EditText edtPass = findViewById(R.id.edtPassword);
+        if(tiet.getText().toString().trim().isEmpty()){
+            til.setError("Please enter valid email.");
+            return false;
+        }else{
+            til.setError(null);
+            if(edtPass.getText().toString().trim().isEmpty()){
+                til_pass.setError("Please enter your password");
+                return false;
+            }
+            else {
+                til_pass.setError(null);
+                return true;
+            }
+        }
 
-                        // ...
-                    }
-                });
+    }
+
+    private void SignIn() {
+        if(check()){
+            email = findViewById(R.id.edtEmail);
+            pass = findViewById(R.id.edtPassword);
+            mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(SignInActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                            // ...
+                        }
+                    });
+        }
     }
 
     @Override
