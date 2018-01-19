@@ -57,7 +57,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
-
         <activity
             android:name=".AddGroupActivity"
             android:label="Add group"
@@ -71,6 +70,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
+
         <activity android:name=".AddMemberActivity"
             android:label="Add members"
             android:theme="@style/ActionBarTheme">
@@ -78,6 +78,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ChooseGroupActivity" />
         </activity>
+
         <activity android:name=".HelpActivity"></activity>
     </application>
 
