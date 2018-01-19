@@ -11,13 +11,13 @@
 
     <Button
         android:clickable="true"
-        android:id="@+id/btn_edit"
+        android:id="@+id/btnAddMember2Grp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:text="@string/edit"
+        android:text="Add member"
         android:textColor="@color/colorPrimary" />
 
     <TextView
@@ -62,20 +62,23 @@
                 android:textSize="20dp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="@string/sum"
-                android:id="@+id/SUM"
+                android:text="Group's name"
+                android:id="@+id/tvGroupChosen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"></TextView>
+                android:layout_weight="1">
+
+            </TextView>
 
             <TextView
                 android:paddingLeft="60dp"
                 android:textSize="15dp"
-                android:text="@string/amount"
-                android:id="@+id/AMOUNT"
+                android:text="Bio"
+                android:id="@+id/tvBioGroupChosen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"></TextView>
+                android:layout_weight="1">
+            </TextView>
         </LinearLayout>
 
         <ImageView
@@ -111,33 +114,5 @@
         android:textColor="@color/colorPrimary" />
 
 
-
-
-    <!--<Button-->
-        <!--android:layout_alignParentLeft=""-->
-        <!--android:id="@+id/btn_create"-->
-        <!--android:layout_marginTop="30dp"-->
-        <!--android:background="#FFFFFF"-->
-        <!--android:contextClickable="true"-->
-        <!--android:textSize="16dp"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:text="@string/create_grp"-->
-        <!--android:layout_below="@+id/recycler_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="30dp" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/tv.join"-->
-        <!--android:drawablePadding="10dp"-->
-        <!--android:layout_marginTop="4dp"-->
-        <!--android:background="#FFFFFF"-->
-        <!--android:contextClickable="true"-->
-        <!--android:textSize="20dp"-->
-        <!--android:drawableLeft="@drawable/join"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:text="@string/join_grp"-->
-        <!--android:layout_below="@+id/tv.create"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dp" />-->
 
 </RelativeLayout>
