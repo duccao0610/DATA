@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/money_hater_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogInActivity"></activity>
+        <activity android:name=".LogInActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -45,8 +45,8 @@
         </activity>
         <activity
             android:name=".MainScreen"
-            android:theme="@style/ActionBarTheme"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:theme="@style/ActionBarTheme" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ThemGiaoDichActivity"
@@ -57,7 +57,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
-
         <activity
             android:name=".AddGroupActivity"
             android:label="Add group"
@@ -71,6 +70,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
+        <activity android:name=".HelpActivity"></activity>
     </application>
 
 </manifest>
