@@ -1,6 +1,7 @@
 package com.example.duccao.money_hater;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -251,7 +252,7 @@ public class MainScreen extends AppCompatActivity {
                                             tmp.getTitle(),
                                             tmp.getMoney() + "",
                                             tmp.getGmoney() + "",
-                                            false,
+                                            true,
                                             tmp.getGmoney() / tmp.getMoney());
                                     listItem.add(item);
                                 }
@@ -273,8 +274,9 @@ public class MainScreen extends AppCompatActivity {
                                                 tmp.getTitle(),
                                                 0 + "",
                                                 tmp.getGmoney() + "",
-                                                false,
+                                                true,
                                                 tmp.getGmoney() / tmp.getMoney());
+                                        //cai numberOfPeople nay phai -1 nhe vi k tinh nguoi post
                                         listItem.add(item);
                                     }
                                 }
@@ -305,6 +307,31 @@ public class MainScreen extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    private Boolean exit = false;
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
     }
 
 }
