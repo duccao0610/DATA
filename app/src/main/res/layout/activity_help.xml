@@ -40,4 +40,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/txtcontact"
+        android:layout_margin="15dp"
+        android:clickable="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        android:text="@string/contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

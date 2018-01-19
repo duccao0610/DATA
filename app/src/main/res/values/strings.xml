@@ -18,6 +18,7 @@
     <string name="feedback_greet">Your feedback is very important to us. Lets build a better Money Hater together.</string>
     <string name="about" translatable="false">This is DATAs project. We are Hoang Anh, Tuan Anh, Minh Duc, Van Duc, Duc Thinh. Thanks Mr.Thuan and Mr.Quang for helping us.</string>
     <string name="noidung">Details</string>
+    <string name="contact">Contact</string>
     <string name="privacy">Privacy</string>
     <string name="question">Question</string>
     <string name="privacy_title">Your data is absolutely safe!</string>

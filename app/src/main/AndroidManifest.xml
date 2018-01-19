@@ -96,9 +96,14 @@
             android:label="Contact">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HelpActivity" />
+        </activity>
+        <activity android:name=".AboutActivity"
+            android:label="About">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
-        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

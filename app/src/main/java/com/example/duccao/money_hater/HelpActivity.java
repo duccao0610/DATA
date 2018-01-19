@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 public class HelpActivity extends AppCompatActivity {
 
-    TextView txtQuestion, txtPrivacy;
-    int c = 0;
+    TextView txtQuestion, txtPrivacy, txtContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +31,7 @@ public class HelpActivity extends AppCompatActivity {
 
         txtQuestion = findViewById(R.id.txtquestion);
         txtPrivacy = findViewById(R.id.txtprivacy);
+        txtContact = findViewById(R.id.txtcontact);
 
         txtQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +46,14 @@ public class HelpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentPrivacy = new Intent(HelpActivity.this, PrivacyActivity.class);
                 startActivity(intentPrivacy);
+            }
+        });
+
+        txtContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentContact = new Intent(HelpActivity.this, ContactActivity.class);
+                startActivity(intentContact);
             }
         });
     }

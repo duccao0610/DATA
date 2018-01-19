@@ -18,7 +18,7 @@ public class ContactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
-        Toolbar myChildToolbar = (Toolbar) findViewById(R.id.contact_toolbar);
+        Toolbar myChildToolbar = (Toolbar) findViewById(R.id.contact_bar);
         setSupportActionBar(myChildToolbar);
 
         // Get a support ActionBar corresponding to this toolbar
