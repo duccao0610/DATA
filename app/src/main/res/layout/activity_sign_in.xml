@@ -78,13 +78,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:textColor="#fff"
+                android:background="@drawable/btn_sign_in_selector"
+                android:textColor="@color/black"
                 android:id="@+id/btnSignin"
                 android:layout_margin="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login"
-                tools:background="@color/colorPrimary" />
+                android:text="@string/login" />
 
             <LinearLayout
                 android:layout_margin="10dp"

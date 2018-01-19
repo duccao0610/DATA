@@ -79,12 +79,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                android:textColor="@color/black"
+                android:background="@drawable/btn_sign_in_selector"
                 android:id="@+id/btnregister"
                 android:layout_margin="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/dangky"
-                tools:background="@android:color/holo_blue_bright" />
+                android:text="@string/dangky" />
 
             <TextView
                 android:id="@+id/txtsignin"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">MoneyHater</string>
+    <string name="app_name" translatable="false">Money Hater</string>
     <string name="facebook_app_id" translatable="false">210652492815261</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb210652492815261</string>
     <string name="thongbao">Sign in by email</string>
