@@ -113,22 +113,24 @@
             fab:menu_backgroundColor="#ccffffff"
             fab:menu_labels_ellipsize="end"
             fab:menu_labels_singleLine="true"
-            fab:rippleColor="@color/colorPrimary">
+            fab:menu_colorNormal="@color/colorPrimary"
+            fab:menu_colorPressed="@color/red"
+            fab:menu_colorRipple="@color/red"
+            fab:menu_fab_label="==DATA==">
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fab1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_star"
+                android:src="@drawable/ic_add"
                 fab:fab_label="Add items"
-                fab:fab_size="mini"
-                fab:rippleColor="@color/colorPrimary" />
+                fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fab2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_star"
+                android:src="@drawable/ic_edit"
                 fab:fab_label="Edit personal profile"
                 fab:fab_size="mini" />
 
@@ -136,10 +138,9 @@
                 android:id="@+id/fab3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_star"
+                android:src="@drawable/ic_edit"
                 fab:fab_label="Edit group profile"
-                fab:fab_size="mini"
-                fab:rippleColor="@color/colorPrimary" />
+                fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
 
