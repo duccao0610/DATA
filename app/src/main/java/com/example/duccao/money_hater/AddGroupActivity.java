@@ -11,7 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddGroupActivity extends AppCompatActivity {
 
@@ -24,29 +31,56 @@ public class AddGroupActivity extends AppCompatActivity {
     private Button btnAdd;
     private Button btnSave;
     private EditText etAddMember;
+    private EditText etGroupName;
+
+    private DatabaseReference usersRef, groupsRef, relationsRef;
 
     private String memberNameTemp;
+    private String nameGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
-
+        listItem = new ArrayList();
         recyclerView = findViewById(R.id.rvAddMember);
         btnAdd = findViewById(R.id.btnAddMember);
         btnSave = findViewById(R.id.btnSaveAddGroup);
         etAddMember = findViewById(R.id.etSearchAddMember);
-
+        etGroupName = findViewById(R.id.etGroupName);
+        usersRef = FirebaseDatabase.getInstance().getReference("users");
+        groupsRef = FirebaseDatabase.getInstance().getReference("groups");
+        relationsRef = FirebaseDatabase.getInstance().getReference("relations");
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 memberNameTemp = etAddMember.getText().toString();
 
                 if(!memberNameTemp.isEmpty()){
-                    AddMemberItem item = new AddMemberItem(R.drawable.icon_bitcoin, memberNameTemp, "temp@mail.com");
-                    listItem.add(item);
-                    adapter.notifyDataSetChanged();
-                    etAddMember.setText("");
+                    usersRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            boolean userExist = false;
+                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                                if(userSnapshot.child("mail").getValue(String.class).equals(memberNameTemp)){
+                                    AddMemberItem item = new AddMemberItem(R.drawable.icon_bitcoin, memberNameTemp, "***");
+                                    listItem.add(item);
+                                    adapter.notifyDataSetChanged();
+                                    etAddMember.setText("");
+                                    userExist = true;
+                                    break;
+                                }
+                            }
+                            if(!userExist){
+                                Toast.makeText(AddGroupActivity.this, "User does not exist!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+
+                        }
+                    });
                 }
             }
         });
@@ -55,30 +89,62 @@ public class AddGroupActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AddGroupActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                finish();
-                Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
-                startActivity(intentChooseGrp);
+                nameGroup = etGroupName.getText().toString();
+                if (!nameGroup.equals("")) {
+                    groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            boolean isExist = false;
+                            for(DataSnapshot groupSnapshot : dataSnapshot.getChildren()){
+                               if(groupSnapshot.child("name").getValue(String.class).equals(nameGroup)){
+                                   Toast.makeText(AddGroupActivity.this, "The name had existed", Toast.LENGTH_SHORT).show();
+                                   isExist = true;
+                                   break;
+                               }
+                            }
+                            if(!isExist){
+                                final long count = dataSnapshot.getChildrenCount() + 1;
+                                Group tmp = new Group(0, nameGroup);
+                                groupsRef.child(count+"").setValue(tmp);
+                                for(final AddMemberItem item : listItem){
+                                    usersRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                                                if(userSnapshot.child("mail").getValue(String.class).equals(item.getName())){
+                                                    Relation tmp = new Relation(count, 0, userSnapshot.getKey().toString());
+                                                    relationsRef.push().setValue(tmp);
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError error) {
+
+                                        }
+                                    });
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+
+                        }
+                    });
+
+
+                    Toast.makeText(AddGroupActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
+                    startActivity(intentChooseGrp);
+                }
+                else {
+                    Toast.makeText(AddGroupActivity.this, "Name can not be blank", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-
-                ///list temp
-        listItem = new ArrayList<>();
-        AddMemberItem item1 = new AddMemberItem(R.drawable.icon_bitcoin, "Tran Tuan Anh", "t.tuananh112@gmail.com");
-        AddMemberItem item2 = new AddMemberItem(R.drawable.icon_bitcoin, "Pham Hoang Anh", "t.tuananh112@gmail.com");
-        AddMemberItem item3 = new AddMemberItem(R.drawable.icon_bitcoin, "Vu Van Duc", "t.tuananh112@gmail.com");
-        AddMemberItem item4 = new AddMemberItem(R.drawable.icon_bitcoin, "Nguyen Duc Thinh", "t.tuananh112@gmail.com");
-        AddMemberItem item5 = new AddMemberItem(R.drawable.icon_bitcoin, "Cao Minh Cop", "t.tuananh112@gmail.com");
-        AddMemberItem item6 = new AddMemberItem(R.drawable.icon_bitcoin, "Cao Minh Cop", "t.tuananh112@gmail.com");
-
-        listItem.add(item1);
-        listItem.add(item2);
-        listItem.add(item3);
-        listItem.add(item4);
-        listItem.add(item5);
-        listItem.add(item6);
-
 
         adapter = new AddMemberLayoutAdapter(this, listItem);
         layoutManager = new LinearLayoutManager(getApplicationContext());
