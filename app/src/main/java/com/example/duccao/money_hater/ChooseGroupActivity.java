@@ -10,6 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +33,15 @@ public class ChooseGroupActivity extends AppCompatActivity {
     private TextView tvGroupChosen;
     private TextView tvBioGroupChosen;
 
+    private DatabaseReference relationsRef, groupsRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_group);
+
+        relationsRef = FirebaseDatabase.getInstance().getReference("relations");
+        groupsRef = FirebaseDatabase.getInstance().getReference("groups");
 
         recyclerView = findViewById(R.id.recycler_view);
         btnAddGroup = findViewById(R.id.btn_addGroup);
@@ -74,19 +86,37 @@ public class ChooseGroupActivity extends AppCompatActivity {
 
     private void GroupData(){
 
-        Groups groups = new Groups("Group1", "B15DCCN1", "12345");
-        groupsList.add(groups);
+        relationsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (final DataSnapshot relationSnapshot : dataSnapshot.getChildren()){
+                    if(relationSnapshot.child("uid").getValue(String.class).equals(FirebaseAuth.getInstance().getCurrentUser().getUid().toString())){
+                        groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot groupSnapshot : dataSnapshot.getChildren()){
+                                    if(relationSnapshot.child("gid").getValue(Long.class).toString().equals(groupSnapshot.getKey().toString())){
+                                        Groups tmp = groupSnapshot.getValue(Groups.class);
+                                        groupsList.add(tmp);
+                                        groupsAdapter.notifyDataSetChanged();
+                                    }
+                                }
+                            }
 
-        groups = new Groups("Group2","B15DCCN2","54321");
-        groupsList.add(groups);
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-        groups = new Groups("Group3","B15DCCN3","32134");
-        groupsList.add(groups);
+                            }
+                        });
+                    }
+                }
+            }
 
-        groups = new Groups("Group4","B15DCCN4","54646");
-        groupsList.add(groups);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        groups = new Groups("Group5","B15DCCN5","54681");
-        groupsList.add(groups);
+            }
+        });
+
     }
 }
