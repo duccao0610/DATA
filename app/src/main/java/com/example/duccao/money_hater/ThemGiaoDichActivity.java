@@ -134,7 +134,7 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
             final String content = title.getText().toString();
             final Date d = new Date();
             /////
-            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
             final String date = dateFormat.format(d);
 
             final long each = Sum/Selected.size();
