@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,14 +25,15 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView Name, Id, Pass;
+        public TextView Name, Id;
+        public ImageView ivLeaveGroup;
         private ItemClickListener itemClickListener;
 
         public MyViewHolder(View view) {
             super(view);
             Name = (TextView) view.findViewById(R.id.Name_group);
             Id = (TextView) view.findViewById(R.id.Id_group);
-            Pass = (TextView) view.findViewById(R.id.Pass_group);
+            ivLeaveGroup = view.findViewById(R.id.ivLeaveGroup);
 
             view.setOnClickListener(this);
         }
@@ -62,12 +64,20 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Groups groups = groupsList.get(position);
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        final int pos = position;
+        final Groups groups = groupsList.get(pos);
 
         holder.Name.setText(groups.getName());
         holder.Id.setText(groups.getTotal()+"");
-        holder.Pass.setText("***");
+
+        holder.ivLeaveGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                groupsList.remove(pos);
+                notifyDataSetChanged();
+            }
+        });
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override

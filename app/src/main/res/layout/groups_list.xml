@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textColor="@color/Name_group"
+        android:text="Group's name"
         android:textSize="16dp"
         android:textStyle="bold" />
 
@@ -24,10 +25,13 @@
         android:id="@+id/Id_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Group's ID"
         android:layout_below="@id/Name_group" />
 
-    <TextView
-        android:id="@+id/Pass_group"
+    <ImageView
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_exit"
+        android:id="@+id/ivLeaveGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
