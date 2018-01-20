@@ -1,7 +1,10 @@
 package com.example.duccao.money_hater;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +12,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Duc Cao on 1/18/2018.
  */
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHolder> {
-
     private ArrayList<Groups> groupsList;
     private TextView tvGroupChosen;
     private TextView tvBioGroupChosen;
-
+    private DatabaseReference groupsRef = FirebaseDatabase.getInstance().getReference("groups");
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -83,6 +93,27 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
             @Override
             public void onClick(View view, int position) {
                 tvGroupChosen.setText(groups.getName());
+                final SharedPreferences shr = context.getSharedPreferences("data", MODE_PRIVATE);
+                final SharedPreferences.Editor update = shr.edit();
+                groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot groupSnapshot : dataSnapshot.getChildren()){
+                            if(groupSnapshot.child("name").getValue(String.class).equals(groups.getName())){
+                                update.putLong("gid", Long.parseLong(groupSnapshot.getKey().toString()));
+                                update.apply();
+                                Intent intentMainScreen = new Intent(context, MainScreen.class);
+                                context.startActivity(intentMainScreen);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
                 //group selected
                 //save data
             }
