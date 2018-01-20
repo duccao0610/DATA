@@ -74,7 +74,7 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         shr = getSharedPreferences("data", MODE_PRIVATE);
-        gid = shr.getLong("gid", 1);
+        gid = shr.getLong("gid", -1);
         recyclerView = findViewById(R.id.rvMainScreen);
         btnTotalGroupSpent = findViewById(R.id.btnTotalGroupSpent);
         btnSpentWithGroup = findViewById(R.id.btnSpentWithGroup);

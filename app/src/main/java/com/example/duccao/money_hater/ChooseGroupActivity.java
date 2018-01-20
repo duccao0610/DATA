@@ -45,7 +45,7 @@ public class ChooseGroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_group);
         shr = getSharedPreferences("data", MODE_PRIVATE);
-        gid = shr.getLong("gid", 1);
+        gid = shr.getLong("gid", -1);
         relationsRef = FirebaseDatabase.getInstance().getReference("relations");
         groupsRef = FirebaseDatabase.getInstance().getReference("groups");
 
@@ -62,22 +62,27 @@ public class ChooseGroupActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(groupsAdapter);
 
-        groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot groupSnapshot : dataSnapshot.getChildren()){
-                    if(groupSnapshot.getKey().toString().equals(gid+"")){
-                        tvGroupChosen.setText(groupSnapshot.child("name").getValue(String.class));
-                        break;
+        if(gid == -1) {
+            tvGroupChosen.setText("No group is chosen");
+        }
+        else {
+            groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot groupSnapshot : dataSnapshot.getChildren()) {
+                        if (groupSnapshot.getKey().toString().equals(gid + "")) {
+                            tvGroupChosen.setText(groupSnapshot.child("name").getValue(String.class));
+                            break;
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
 
         GroupData();
 
