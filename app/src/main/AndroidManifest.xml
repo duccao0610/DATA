@@ -70,14 +70,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
-        <activity android:name=".AddMemberActivity"
+        <activity
+            android:name=".AddMemberActivity"
             android:label="Add members"
             android:theme="@style/ActionBarTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ChooseGroupActivity" />
         </activity>
-
         <activity
             android:name=".HelpActivity"
             android:label="@string/help">
@@ -106,13 +106,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HelpActivity" />
         </activity>
-        <activity android:name=".AboutActivity"
+        <activity
+            android:name=".AboutActivity"
             android:label="About">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainScreen" />
         </activity>
+        <activity android:name=".EditProfileActivity"
+            android:label="Edit">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainScreen" />
+        </activity>
     </application>
-
 
 </manifest>

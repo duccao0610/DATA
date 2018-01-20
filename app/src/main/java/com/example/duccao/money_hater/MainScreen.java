@@ -1,5 +1,6 @@
 package com.example.duccao.money_hater;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
@@ -60,13 +61,14 @@ public class MainScreen extends AppCompatActivity {
     private Handler mUiHandler = new Handler();
 
     private boolean showOnlyPerson = false;
-    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String uid;
+    private long gid = 1; //current group
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         recyclerView = findViewById(R.id.rvMainScreen);
         btnTotalGroupSpent = findViewById(R.id.btnTotalGroupSpent);
         btnSpentWithGroup = findViewById(R.id.btnSpentWithGroup);
@@ -121,7 +123,8 @@ public class MainScreen extends AppCompatActivity {
         btnPersonalProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainScreen.this, "Personal profile selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainScreen.this, EditProfileActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
         btnGroupProfile.setOnClickListener(new View.OnClickListener() {
@@ -256,97 +259,14 @@ public class MainScreen extends AppCompatActivity {
     }
 
     public void loadData() {
-        relationsref.addValueEventListener(new ValueEventListener() {
+
+        groupsref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean haveGroup = false;
-                long gid = 0;
-                for (DataSnapshot relationSnapshot : dataSnapshot.getChildren()) {
-                    if (relationSnapshot.child("uid").getValue(String.class).equals(uid)) {
-                        gid = relationSnapshot.child("gid").getValue(Long.class);
-                        final long gid1 = gid;
-                        groupsref.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot2) {
-                                Group tmp = dataSnapshot2.child(String.valueOf(gid1)).getValue(Group.class);
-                                tvTotalGroupSpent.setText((double) tmp.getTotal() / 1000 + "k");
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError error) {
-
-                            }
-                        });
-
-
-                        tvSpentWithGroup.setText((double) (relationSnapshot.child("spentwith").getValue(Long.class)) / 1000 + "k");
-                        haveGroup = true;
-                        break;
+            public void onDataChange(DataSnapshot dataSnapshot2) {
+                for(DataSnapshot groupSnapshot : dataSnapshot2.getChildren()){
+                    if (groupSnapshot.getKey().toString().equals(gid+"")){
+                        tvTotalGroupSpent.setText((double) groupSnapshot.child("total").getValue(Long.class)/ 1000 + "k");
                     }
-                }
-                if (!haveGroup) {
-                    tvTotalGroupSpent.setText("NO GROUP");
-                    tvSpentWithGroup.setText("NO GROUP");
-                } else {
-                    listItem = new ArrayList<>();
-                    final long gid2 = gid;
-                    paymentsRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot3) {
-                            for (DataSnapshot paymentSnapshot : dataSnapshot3.getChildren()) {
-                                if (paymentSnapshot.child("gid").getValue(Long.class) == gid2 && paymentSnapshot.child("uid").getValue(String.class).equals(uid)) {
-                                    Payment tmp = paymentSnapshot.getValue(Payment.class);
-                                    MainScreenItem item = new MainScreenItem(R.drawable.profile_icon,
-                                            tmp.getDate(),
-                                            tmp.getTitle(),
-                                            tmp.getMoney() + "",
-                                            tmp.getGmoney() + "",
-                                            true,
-                                            tmp.getGmoney() / tmp.getMoney());
-                                    listItem.add(item);
-                                }
-                            }
-                            if (!showOnlyPerson) {
-                                for (DataSnapshot paymentSnapshot : dataSnapshot3.getChildren()) {
-                                    if (paymentSnapshot.child("gid").getValue(Long.class) == gid2) {
-                                        boolean isExisted = false;
-                                        for (MainScreenItem tmp : listItem) {
-                                            if (paymentSnapshot.child("date").getValue(String.class).equals(tmp.getTime())) {
-                                                isExisted = true;
-                                                break;
-                                            }
-                                        }
-                                        if (isExisted) continue;
-                                        Payment tmp = paymentSnapshot.getValue(Payment.class);
-                                        MainScreenItem item = new MainScreenItem(R.drawable.profile_icon,
-                                                tmp.getDate(),
-                                                tmp.getTitle(),
-                                                0 + "",
-                                                tmp.getGmoney() + "",
-                                                true,
-                                                tmp.getGmoney() / tmp.getMoney());
-                                        //cai numberOfPeople nay phai -1 nhe vi k tinh nguoi post
-                                        listItem.add(item);
-                                    }
-                                }
-                            }
-                            Collections.sort(listItem);
-                            layoutManager = new LinearLayoutManager(MainScreen.this);
-                            recyclerView.setLayoutManager(layoutManager);
-                            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-                            adapter = new MainScreenLayoutAdapter(MainScreen.this, listItem);
-                            recyclerView.setAdapter(adapter);
-                            recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-
-                        }
-                    });
-
-
                 }
 
             }
@@ -356,6 +276,86 @@ public class MainScreen extends AppCompatActivity {
 
             }
         });
+
+        relationsref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot3) {
+                for(DataSnapshot relationSnapshot : dataSnapshot3.getChildren()){
+                    if(relationSnapshot.child("uid").getValue(String.class).equals(uid) && relationSnapshot.child("gid").getValue(Long.class) == gid){
+                        tvSpentWithGroup.setText((double) (relationSnapshot.child("spentwith").getValue(Long.class)) / 1000 + "k");
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+        if (gid == -1) {
+            tvTotalGroupSpent.setText("NO GROUP");
+            tvSpentWithGroup.setText("NO GROUP");
+        } else {
+            listItem = new ArrayList<>();
+            final long gid2 = gid;
+            paymentsRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot3) {
+                    for (DataSnapshot paymentSnapshot : dataSnapshot3.getChildren()) {
+                        if (paymentSnapshot.child("gid").getValue(Long.class) == gid2 && paymentSnapshot.child("uid").getValue(String.class).equals(uid)) {
+                            Payment tmp = paymentSnapshot.getValue(Payment.class);
+                            MainScreenItem item = new MainScreenItem(R.drawable.profile_icon,
+                                    tmp.getDate(),
+                                    tmp.getTitle(),
+                                    tmp.getMoney() + "",
+                                    tmp.getGmoney() + "",
+                                    true,
+                                    tmp.getGmoney() / tmp.getMoney());
+                            listItem.add(item);
+                        }
+                    }
+                    if (!showOnlyPerson) {
+                        for (DataSnapshot paymentSnapshot : dataSnapshot3.getChildren()) {
+                            if (paymentSnapshot.child("gid").getValue(Long.class) == gid2) {
+                                boolean isExisted = false;
+                                for (MainScreenItem tmp : listItem) {
+                                    if (paymentSnapshot.child("date").getValue(String.class).equals(tmp.getTime())) {
+                                        isExisted = true;
+                                        break;
+                                    }
+                                }
+                                if (isExisted) continue;
+                                Payment tmp = paymentSnapshot.getValue(Payment.class);
+                                MainScreenItem item = new MainScreenItem(R.drawable.profile_icon,
+                                        tmp.getDate(),
+                                        tmp.getTitle(),
+                                        0 + "",
+                                        tmp.getGmoney() + "",
+                                        true,
+                                        tmp.getGmoney() / tmp.getMoney());
+                                //cai numberOfPeople nay phai -1 nhe vi k tinh nguoi post
+                                listItem.add(item);
+                            }
+                        }
+                    }
+                    Collections.sort(listItem);
+                    layoutManager = new LinearLayoutManager(MainScreen.this);
+                    recyclerView.setLayoutManager(layoutManager);
+                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+                    adapter = new MainScreenLayoutAdapter(MainScreen.this, listItem);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+        }
     }
 
 
@@ -384,4 +384,15 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+                Toast.makeText(this, "Profile is updated", Toast.LENGTH_SHORT).show();
+            }
+            if(resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
