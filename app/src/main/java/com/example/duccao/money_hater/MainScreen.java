@@ -353,6 +353,7 @@ public class MainScreen extends AppCompatActivity {
                         }
                     }
                     Collections.sort(listItem);
+                    Collections.reverse(listItem);
                     layoutManager = new LinearLayoutManager(MainScreen.this);
                     recyclerView.setLayoutManager(layoutManager);
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
