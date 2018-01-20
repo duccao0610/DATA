@@ -62,7 +62,7 @@ public class MainScreen extends AppCompatActivity {
 
     private boolean showOnlyPerson = false;
     private String uid;
-    private long gid; //current group
+    private long gid = 1; //current group
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
