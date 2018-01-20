@@ -90,15 +90,6 @@ public class MainScreen extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         //Floating button
-        btnAddItem.setButtonSize(FloatingActionButton.SIZE_MINI);
-        btnAddItem.setLabelText("Add items");
-        btnAddItem.setImageResource(R.drawable.ic_edit);
-        btnPersonalProfile.setButtonSize(FloatingActionButton.SIZE_MINI);
-        btnPersonalProfile.setLabelText("Change personal profile");
-        btnPersonalProfile.setImageResource(R.drawable.ic_edit);
-        btnGroupProfile.setButtonSize(FloatingActionButton.SIZE_MINI);
-        btnGroupProfile.setLabelText("Change group profile");
-        btnGroupProfile.setImageResource(R.drawable.ic_edit);
 
         menuExtend.setClosedOnTouchOutside(true);
         menuExtend.hideMenuButton(false);

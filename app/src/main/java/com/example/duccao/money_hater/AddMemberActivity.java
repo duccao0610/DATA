@@ -128,8 +128,8 @@ public class AddMemberActivity extends AppCompatActivity {
 
                 Toast.makeText(AddMemberActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 finish();
-                Intent intentChooseGrp = new Intent(AddMemberActivity.this, ChooseGroupActivity.class);
-                startActivity(intentChooseGrp);
+//                Intent intentChooseGrp = new Intent(AddMemberActivity.this, ChooseGroupActivity.class);
+//                startActivity(intentChooseGrp);
             }
         });
         listItem = new ArrayList<>();
