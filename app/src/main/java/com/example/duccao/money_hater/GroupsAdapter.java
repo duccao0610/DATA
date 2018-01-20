@@ -1,5 +1,6 @@
 package com.example.duccao.money_hater;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -102,8 +103,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
                             if(groupSnapshot.child("name").getValue(String.class).equals(groups.getName())){
                                 update.putLong("gid", Long.parseLong(groupSnapshot.getKey().toString()));
                                 update.apply();
-                                Intent intentMainScreen = new Intent(context, MainScreen.class);
-                                context.startActivity(intentMainScreen);
+//                                Intent intentMainScreen = new Intent(context, MainScreen.class);
+//                                context.startActivity(intentMainScreen);
+
+//                                ((Activity)context).finish();
                             }
                         }
                     }
