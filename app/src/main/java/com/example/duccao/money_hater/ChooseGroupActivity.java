@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +34,9 @@ public class ChooseGroupActivity extends AppCompatActivity {
     private TextView tvGroupChosen;
     private TextView tvBioGroupChosen;
 
+
     private DatabaseReference relationsRef, groupsRef;
+    private long gid = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,23 @@ public class ChooseGroupActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(groupsAdapter);
+
+        groupsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot groupSnapshot : dataSnapshot.getChildren()){
+                    if(groupSnapshot.getKey().toString().equals(gid+"")){
+                        tvGroupChosen.setText(groupSnapshot.child("name").getValue(String.class));
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         GroupData();
 
