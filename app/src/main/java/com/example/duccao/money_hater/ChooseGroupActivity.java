@@ -1,6 +1,7 @@
 package com.example.duccao.money_hater;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,13 +37,15 @@ public class ChooseGroupActivity extends AppCompatActivity {
 
 
     private DatabaseReference relationsRef, groupsRef;
-    private long gid = 1;
+    private long gid;
+    private SharedPreferences shr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_group);
-
+        shr = getSharedPreferences("data", MODE_PRIVATE);
+        gid = shr.getLong("gid", 1);
         relationsRef = FirebaseDatabase.getInstance().getReference("relations");
         groupsRef = FirebaseDatabase.getInstance().getReference("groups");
 

@@ -1,6 +1,7 @@
 package com.example.duccao.money_hater;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -35,13 +36,15 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
     DatabaseReference relationsRef, usersRef, groupsRef, paymentsRef;
     EditText tongTien, title;
     long gid;
+    private SharedPreferences shr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_giao_dich);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        gid = 1; //current group
+        shr = getSharedPreferences("data", MODE_PRIVATE);
+        gid = shr.getLong("gid", 1);
         relationsRef = FirebaseDatabase.getInstance().getReference("relations");
         usersRef = FirebaseDatabase.getInstance().getReference("users");
         groupsRef = FirebaseDatabase.getInstance().getReference("groups");
@@ -176,7 +179,7 @@ public class ThemGiaoDichActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         for(DataSnapshot relationSnapshot : dataSnapshot.getChildren()){
-                                            if(relationSnapshot.child("uid").getValue(String.class).equals(userSnapshot.getKey().toString())){
+                                            if(relationSnapshot.child("uid").getValue(String.class).equals(userSnapshot.getKey().toString()) && relationSnapshot.child("gid").getValue(Long.class) == gid){
                                                 long oldspent = relationSnapshot.child("spentwith").getValue(Long.class);
                                                 relationsRef.child(relationSnapshot.getKey().toString()).child("spentwith").setValue(oldspent + each);
                                             }

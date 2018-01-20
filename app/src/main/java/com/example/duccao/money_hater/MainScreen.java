@@ -2,6 +2,7 @@ package com.example.duccao.money_hater;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -62,13 +63,18 @@ public class MainScreen extends AppCompatActivity {
 
     private boolean showOnlyPerson = false;
     private String uid;
-    private long gid = 1; //current group
+    private long gid; //current group
+
+    private SharedPreferences shr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        shr = getSharedPreferences("data", MODE_PRIVATE);
+        gid = shr.getLong("gid", 1);
         recyclerView = findViewById(R.id.rvMainScreen);
         btnTotalGroupSpent = findViewById(R.id.btnTotalGroupSpent);
         btnSpentWithGroup = findViewById(R.id.btnSpentWithGroup);

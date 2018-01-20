@@ -1,6 +1,7 @@
 package com.example.duccao.money_hater;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,14 +37,15 @@ public class AddMemberActivity extends AppCompatActivity {
 
     private String memberNameTemp;
     private DatabaseReference usersRef, groupsRef, relationsRef;
-
+    private SharedPreferences shr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
 
+        shr = getSharedPreferences("data", MODE_PRIVATE);
+        gid = shr.getLong("gid", 1);
 
-        gid = 1; //current group;
         recyclerView = findViewById(R.id.rvAddMember1);
         btnAdd = findViewById(R.id.btnAddMember1);
         btnSave = findViewById(R.id.btnSaveMember1);
