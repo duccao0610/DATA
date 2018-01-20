@@ -67,9 +67,21 @@ public class AddMemberActivity extends AppCompatActivity {
                             for (DataSnapshot userSnapshot : dataSnapshot.getChildren()){
                                 if(userSnapshot.child("mail").getValue(String.class).equals(memberNameTemp)){
                                     AddMemberItem item = new AddMemberItem(R.drawable.icon_bitcoin, memberNameTemp, "***");
-                                    listItem.add(item);
-                                    adapter.notifyDataSetChanged();
-                                    etAddMember.setText("");
+                                    boolean isInGroup = false;
+                                    for(AddMemberItem item1 : listItem){
+                                        if(item1.getName().equals(item.getName())) {
+                                            isInGroup = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!isInGroup){
+                                        listItem.add(item);
+                                        adapter.notifyDataSetChanged();
+                                        etAddMember.setText("");
+                                    }
+                                    else{
+                                        Toast.makeText(AddMemberActivity.this, "That person had already in group", Toast.LENGTH_SHORT).show();
+                                    }
                                     userExist = true;
                                     break;
                                 }
@@ -127,6 +139,46 @@ public class AddMemberActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+                relationsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(final DataSnapshot relationSnapshot : dataSnapshot.getChildren()){
+                            if(relationSnapshot.child("gid").getValue(Long.class) == gid){
+                                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
+                                            if(userSnapshot.getKey().toString().equals(relationSnapshot.child("uid").getValue(String.class))){
+                                                boolean isExist = false;
+                                                for(AddMemberItem item : listItem){
+                                                    if(item.getName().equals(userSnapshot.child("mail").getValue(String.class))){
+                                                        isExist = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if(!isExist){
+                                                    relationSnapshot.getRef().removeValue();
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
                 Toast.makeText(AddMemberActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 finish();
