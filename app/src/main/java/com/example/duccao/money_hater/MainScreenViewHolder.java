@@ -12,7 +12,7 @@ import android.widget.Toast;
  * Created by Tran Tuan Anh on 1/17/2018.
  */
 
-public class MainScreenViewHolder extends RecyclerView.ViewHolder {
+public class MainScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private ImageView avatar;
     private TextView tvTime;
@@ -23,6 +23,8 @@ public class MainScreenViewHolder extends RecyclerView.ViewHolder {
 
     private FrameLayout container;
 
+    private ItemClickListener itemClickListener;
+
     public MainScreenViewHolder(View itemView) {
         super(itemView);
         avatar = itemView.findViewById(R.id.ivAvatarPost);
@@ -32,6 +34,17 @@ public class MainScreenViewHolder extends RecyclerView.ViewHolder {
         tvGroupConsume = itemView.findViewById(R.id.tvGroupConsume);
         tvNumberOfPeople = itemView.findViewById(R.id.tvNumberOfPeople);
         container = itemView.findViewById(R.id.container);
+
+        itemView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        itemClickListener.onClick(v, getAdapterPosition());
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
     }
 
     public void bindItem(MainScreenItem newItem){
@@ -72,4 +85,6 @@ public class MainScreenViewHolder extends RecyclerView.ViewHolder {
     public TextView getTvGroupConsume() {
         return tvGroupConsume;
     }
+
+
 }

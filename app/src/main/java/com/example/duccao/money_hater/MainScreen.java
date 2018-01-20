@@ -3,7 +3,6 @@ package com.example.duccao.money_hater;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,9 +52,16 @@ public class MainScreen extends AppCompatActivity {
     private TextView tvTotalGroupSpent;
     private TextView tvSpentWithGroup;
 
-    private FloatingActionButton btnAdd;
+//    private FloatingActionButton btnAdd;
+    private FloatingActionMenu menuExtend;
+    private com.github.clans.fab.FloatingActionButton btnAddItem;
+    private com.github.clans.fab.FloatingActionButton btnPersonalProfile;
+    private com.github.clans.fab.FloatingActionButton btnGroupProfile;
+    private Handler mUiHandler = new Handler();
+
     private boolean showOnlyPerson = false;
     final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +72,13 @@ public class MainScreen extends AppCompatActivity {
         btnSpentWithGroup = findViewById(R.id.btnSpentWithGroup);
         tvTotalGroupSpent = findViewById(R.id.tvTotalGroupSpent);
         tvSpentWithGroup = findViewById(R.id.tvSpentWithGroup);
-        btnAdd = findViewById(R.id.btnAddMainScreen);
+
+        menuExtend = findViewById(R.id.menu_red);
+        btnAddItem = findViewById(R.id.fab1);
+        btnPersonalProfile = findViewById(R.id.fab2);
+        btnGroupProfile = findViewById(R.id.fab3);
+
+
 
         usersref = FirebaseDatabase.getInstance().getReference("users").child(uid);
         groupsref = FirebaseDatabase.getInstance().getReference("groups");
@@ -72,6 +86,59 @@ public class MainScreen extends AppCompatActivity {
         paymentsRef = FirebaseDatabase.getInstance().getReference("payments");
 
         recyclerView.setHasFixedSize(true);
+
+        //Floating button
+        btnAddItem.setButtonSize(FloatingActionButton.SIZE_MINI);
+        btnAddItem.setLabelText("Add items");
+        btnAddItem.setImageResource(R.drawable.ic_edit);
+        btnPersonalProfile.setButtonSize(FloatingActionButton.SIZE_MINI);
+        btnPersonalProfile.setLabelText("Change personal profile");
+        btnPersonalProfile.setImageResource(R.drawable.ic_edit);
+        btnGroupProfile.setButtonSize(FloatingActionButton.SIZE_MINI);
+        btnGroupProfile.setLabelText("Change group profile");
+        btnGroupProfile.setImageResource(R.drawable.ic_edit);
+
+        menuExtend.setClosedOnTouchOutside(true);
+        menuExtend.hideMenuButton(false);
+
+        int delay = 400;
+        mUiHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                menuExtend.showMenuButton(true);
+            }
+        }, delay);
+
+        menuExtend.setOnMenuButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (menuExtend.isOpened()) {
+//                    Toast.makeText(MainScreen.this, menuExtend.getMenuButtonLabelText(), Toast.LENGTH_SHORT).show();
+                }
+                menuExtend.toggle(true);
+            }
+        });
+
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainScreen.this, "Add selected", Toast.LENGTH_SHORT).show();
+                Intent intentAdd = new Intent(MainScreen.this, ThemGiaoDichActivity.class);
+                startActivity(intentAdd);
+            }
+        });
+        btnPersonalProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainScreen.this, "Personal profile selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnGroupProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainScreen.this, "Group profile selected", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //setup action bar
         //////////////////
@@ -134,15 +201,6 @@ public class MainScreen extends AppCompatActivity {
         });
         ///////////
 
-        //////////
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainScreen.this, "Add selected", Toast.LENGTH_SHORT).show();
-                Intent intentAdd = new Intent(MainScreen.this, ThemGiaoDichActivity.class);
-                startActivity(intentAdd);
-            }
-        });
 
         usersref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -310,6 +368,7 @@ public class MainScreen extends AppCompatActivity {
     }
 
 
+    //double click back to exit
     private Boolean exit = false;
     @Override
     public void onBackPressed() {
