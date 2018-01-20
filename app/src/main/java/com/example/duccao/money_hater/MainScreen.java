@@ -1,5 +1,6 @@
 package com.example.duccao.money_hater;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
@@ -130,7 +131,8 @@ public class MainScreen extends AppCompatActivity {
         btnPersonalProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainScreen.this, "Personal profile selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainScreen.this, EditProfileActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
         btnGroupProfile.setOnClickListener(new View.OnClickListener() {
@@ -393,4 +395,15 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+                Toast.makeText(this, "Profile is updated", Toast.LENGTH_SHORT).show();
+            }
+            if(resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
