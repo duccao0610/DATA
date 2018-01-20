@@ -5,39 +5,30 @@ package com.example.duccao.money_hater;
  */
 
 public class Groups {
-    private String Name,Id,Pass;
+    public long total;
+    public String name;
 
-    public Groups(){
-
+    public Groups() {
     }
 
-    public Groups(String name, String id, String pass) {
-        Name = name;
-        Id = id;
-        Pass = pass;
+    public Groups(long total, String name) {
+        this.total = total;
+        this.name = name;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
-    }
-
-    public String getPass() {
-        return Pass;
-    }
-
-    public void setPass(String pass) {
-        Pass = pass;
+        this.name = name;
     }
 }

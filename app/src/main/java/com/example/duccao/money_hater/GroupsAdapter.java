@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHolder> {
 
-    private List<Groups> groupsList;
+    private ArrayList<Groups> groupsList;
     private TextView tvGroupChosen;
     private TextView tvBioGroupChosen;
 
@@ -45,7 +46,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
         }
     }
 
-    public GroupsAdapter(List<Groups> groupsList, TextView tvGroupChosen, TextView tvBioGroupChosen, Context context) {
+    public GroupsAdapter(ArrayList<Groups> groupsList, TextView tvGroupChosen, TextView tvBioGroupChosen, Context context) {
         this.groupsList = groupsList;
         this.tvGroupChosen = tvGroupChosen;
         this.tvBioGroupChosen = tvBioGroupChosen;
@@ -65,8 +66,8 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
         final Groups groups = groupsList.get(position);
 
         holder.Name.setText(groups.getName());
-        holder.Id.setText(groups.getId());
-        holder.Pass.setText(groups.getPass());
+        holder.Id.setText(groups.getTotal()+"");
+        holder.Pass.setText("***");
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
