@@ -36,10 +36,19 @@ public class MainScreenLayoutAdapter extends RecyclerView.Adapter<MainScreenView
         if(list.size() > 0){
             holder.bindItem(list.get(position));
 
-            holder.getTvContent().setOnClickListener(new View.OnClickListener() {
+//            holder.getTvContent().setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(context, pos + " selected", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+
+            holder.setItemClickListener(new ItemClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, pos + " selected", Toast.LENGTH_SHORT).show();
+                public void onClick(View view, int position) {
+                    Toast.makeText(context, pos + " selected" , Toast.LENGTH_SHORT).show();;
+                    //fire on Edit post activity
+                    //
                 }
             });
 
