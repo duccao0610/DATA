@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -303,7 +304,10 @@ public class MainScreen extends AppCompatActivity {
         if (gid == -1) {
             tvTotalGroupSpent.setText("NO GROUP");
             tvSpentWithGroup.setText("NO GROUP");
+            btnAddItem.setEnabled(false);
+
         } else {
+            btnAddItem.setEnabled(true);
             listItem = new ArrayList<>();
             final long gid2 = gid;
             paymentsRef.addValueEventListener(new ValueEventListener() {
@@ -319,6 +323,7 @@ public class MainScreen extends AppCompatActivity {
                                     tmp.getGmoney() + "",
                                     true,
                                     tmp.getGmoney() / tmp.getMoney());
+//                            Log.d("testt", "onDataChange: " + tmp.getGmoney() / tmp.getMoney());
                             listItem.add(item);
                         }
                     }
@@ -342,11 +347,13 @@ public class MainScreen extends AppCompatActivity {
                                         true,
                                         tmp.getGmoney() / tmp.getMoney());
                                 //cai numberOfPeople nay phai -1 nhe vi k tinh nguoi post
+//                                Log.d("testt", "onDataChange: " + tmp.getGmoney() / tmp.getMoney());
                                 listItem.add(item);
                             }
                         }
                     }
                     Collections.sort(listItem);
+                    Collections.reverse(listItem);
                     layoutManager = new LinearLayoutManager(MainScreen.this);
                     recyclerView.setLayoutManager(layoutManager);
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

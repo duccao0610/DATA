@@ -135,11 +135,11 @@ public class AddGroupActivity extends AppCompatActivity {
                         }
                     });
 
-
+                    adapter.notifyDataSetChanged();
                     Toast.makeText(AddGroupActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                    finish();
-//                    Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
-//                    startActivity(intentChooseGrp);
+//                    finish();
+                    Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
+                    startActivity(intentChooseGrp);
                 }
                 else {
                     Toast.makeText(AddGroupActivity.this, "Name can not be blank", Toast.LENGTH_SHORT).show();

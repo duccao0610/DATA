@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -89,10 +90,12 @@ public class ChooseGroupActivity extends AppCompatActivity {
         btnAddGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent intentAddGroup = new Intent(ChooseGroupActivity.this, AddGroupActivity.class);
                 startActivity(intentAddGroup);
             }
         });
+
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +109,13 @@ public class ChooseGroupActivity extends AppCompatActivity {
         btnAddMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentAddMember = new Intent(ChooseGroupActivity.this, AddMemberActivity.class);
-                startActivity(intentAddMember);
+                if(gid == -1){
+                    Toast.makeText(ChooseGroupActivity.this, "Must be in at least one group to do this", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intentAddMember = new Intent(ChooseGroupActivity.this, AddMemberActivity.class);
+                    startActivity(intentAddMember);
+                }
             }
         });
     }
