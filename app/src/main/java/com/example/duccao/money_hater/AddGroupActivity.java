@@ -107,7 +107,7 @@ public class AddGroupActivity extends AppCompatActivity {
                                 Group tmp = new Group(0, nameGroup);
                                 groupsRef.child(count+"").setValue(tmp);
                                 for(final AddMemberItem item : listItem){
-                                    usersRef.addValueEventListener(new ValueEventListener() {
+                                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
@@ -126,7 +126,6 @@ public class AddGroupActivity extends AppCompatActivity {
                                     });
                                 }
                             }
-
                         }
 
                         @Override
@@ -138,8 +137,8 @@ public class AddGroupActivity extends AppCompatActivity {
 
                     Toast.makeText(AddGroupActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                     finish();
-//                    Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
-//                    startActivity(intentChooseGrp);
+                    Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
+                    startActivity(intentChooseGrp);
                 }
                 else {
                     Toast.makeText(AddGroupActivity.this, "Name can not be blank", Toast.LENGTH_SHORT).show();
