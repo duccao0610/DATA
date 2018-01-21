@@ -107,7 +107,7 @@ public class AddGroupActivity extends AppCompatActivity {
                                 Group tmp = new Group(0, nameGroup);
                                 groupsRef.child(count+"").setValue(tmp);
                                 for(final AddMemberItem item : listItem){
-                                    usersRef.addValueEventListener(new ValueEventListener() {
+                                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             for(DataSnapshot userSnapshot : dataSnapshot.getChildren()){
