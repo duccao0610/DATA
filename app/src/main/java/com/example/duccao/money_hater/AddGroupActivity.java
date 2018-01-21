@@ -126,6 +126,7 @@ public class AddGroupActivity extends AppCompatActivity {
                                     });
                                 }
                             }
+
                         }
 
                         @Override
@@ -134,9 +135,9 @@ public class AddGroupActivity extends AppCompatActivity {
                         }
                     });
 
-
+                    adapter.notifyDataSetChanged();
                     Toast.makeText(AddGroupActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                    finish();
+//                    finish();
                     Intent intentChooseGrp = new Intent(AddGroupActivity.this, ChooseGroupActivity.class);
                     startActivity(intentChooseGrp);
                 }

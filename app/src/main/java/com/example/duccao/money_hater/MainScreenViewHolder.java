@@ -55,7 +55,7 @@ public class MainScreenViewHolder extends RecyclerView.ViewHolder implements Vie
         tvGroupConsume.setText(newItem.getGroupConsume());
         long num = newItem.getNumberOfPeople();
         if(num > 1)
-            tvNumberOfPeople.setText("+" + (newItem.getNumberOfPeople()));
+            tvNumberOfPeople.setText("+" + (num - 1));
         else
             container.removeAllViews();
 
