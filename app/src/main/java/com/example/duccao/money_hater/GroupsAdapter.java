@@ -106,7 +106,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.MyViewHold
 //                                Intent intentMainScreen = new Intent(context, MainScreen.class);
 //                                context.startActivity(intentMainScreen);
 
-//                                ((Activity)context).finish();
+                                ((Activity)context).finish();
                             }
                         }
                     }
